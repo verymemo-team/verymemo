@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "634454835385",
+    "project_id": "very-memo",
+    "storage_bucket": "very-memo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634454835385:android:b72f320db6dbdaa9619b68",
+        "android_client_info": {
+          "package_name": "io.very.verymemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634454835385-llbd5sma7mpi2d0k3ocd0ar3i0b9231p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.very.verymemo",
+            "certificate_hash": "9c342cf807dc7e999a58cb670954ccf3c02d8ddb"
+          }
+        },
+        {
+          "client_id": "634454835385-qokq6qg6smhfgagi1mfm6e67dm4ig6aj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwyAMazRe06EmNO8Ek2UcekUjOBhbb0zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634454835385-qokq6qg6smhfgagi1mfm6e67dm4ig6aj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "634454835385-idrh57bvv8jqmfa0pq526ldo77vudo5a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.verymemo.very.verymemo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634454835385:android:83161b47b806242d619b68",
+        "android_client_info": {
+          "package_name": "io.verymemo.very"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634454835385-4qtnscbsm38bda7kgv611nvo6j91j9ph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.verymemo.very",
+            "certificate_hash": "9c342cf807dc7e999a58cb670954ccf3c02d8ddb"
+          }
+        },
+        {
+          "client_id": "634454835385-qokq6qg6smhfgagi1mfm6e67dm4ig6aj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwyAMazRe06EmNO8Ek2UcekUjOBhbb0zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634454835385-qokq6qg6smhfgagi1mfm6e67dm4ig6aj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "634454835385-idrh57bvv8jqmfa0pq526ldo77vudo5a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.verymemo.very.verymemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
