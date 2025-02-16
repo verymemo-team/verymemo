@@ -99,23 +99,13 @@ class VariableNavigationBar extends StatelessWidget {
 
   /// ✅ 중앙 플로팅 버튼 (FAB)
   Widget _floatingButton(BuildContext context) {
-    return Container(
-      width: NavigationBarConfig.floatingButtonSize,
-      height: NavigationBarConfig.floatingButtonSize,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Theme.of(context).colorScheme.inverseSurface,
-      ),
-      child: Center(
-        child: IconBtn(
-          iconKey: "edit",
-          size: IconSize.medium,
-          color: Theme.of(context).colorScheme.onInverseSurface,
-          onTap: () {
-            ("플로팅 버튼 클릭됨!");
-          },
-        ),
-      ),
+    return IconCircleBtn(
+      iconKey: "edit",
+      size: NavigationBarConfig.floatingButtonSize,
+      backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+      onTap: () {
+        print("플로팅 버튼 클릭됨!");
+      },
     );
   }
 }
