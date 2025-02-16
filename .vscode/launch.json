@@ -6,18 +6,18 @@
     "configurations": [
     
         {
-            "name": "verymemo_2025",
+            "name": "verymemo",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "verymemo_2025 (profile mode)",
+            "name": "verymemo (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "verymemo_2025 (release mode)",
+            "name": "verymemo (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
