@@ -47,3 +47,5 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 .dart_tool/
+.fvmrc
+.vscode/
