@@ -1,32 +1,110 @@
 part of 'router.dart';
 
+// ✅ 라우터 이름
 abstract class AppRoute {
   static const intro = "/intro";
   static const permissionCheck = "/permissionCheck";
   static const login = "/login";
 
   static const home = "/home";
-  // static const edit = "/edit";
+  static const edit = "/edit";
+  static const delete = "/delete";
   static const search = "/search";
   static const settings = "/settings";
 
   static const userSetting = "/userSetting";
-  static const delete = "/delete";
 }
 
-// 공통 라우트 클래스화
-abstract class CommonRoute extends GoRouteData {
+// ✅ Navigator Key
+abstract class NavigatorKey {
+  static final GlobalKey<NavigatorState> introShellKey =
+      GlobalKey<NavigatorState>(debugLabel: "introShellKey");
+
+  static final GlobalKey<NavigatorState> homeShellKey =
+      GlobalKey<NavigatorState>(debugLabel: "homeShellKey");
+
+  static final GlobalKey<NavigatorState> detailShellKey =
+      GlobalKey<NavigatorState>(debugLabel: "detailShellKey");
+
+  static final GlobalKey<NavigatorState> introBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "introBranchKey");
+
+  static final GlobalKey<NavigatorState> permissionCheckBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "permissionCheckBranchKey");
+
+  static final GlobalKey<NavigatorState> loginBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "loginBranchKey");
+
+  static final GlobalKey<NavigatorState> homeBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "homeBranchKey");
+
+  static final GlobalKey<NavigatorState> editBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "editBranchKey");
+
+  static final GlobalKey<NavigatorState> searchBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "searchBranchKey");
+
+  static final GlobalKey<NavigatorState> settingsBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "settingsBranchKey");
+
+  static final GlobalKey<NavigatorState> userSettingBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "userSettingBranchKey");
+
+  static final GlobalKey<NavigatorState> deleteBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "deleteBranchKey");
+}
+
+// ✅ 공통 Shell 클래스화
+abstract class Shell extends StatefulShellRouteData {
+  const Shell();
+
+  Widget buildScaffold(BuildContext context, GoRouterState state,
+      StatefulNavigationShell navigationShell);
+
+  GlobalKey<NavigatorState> get shellKey;
+
+  @override
+  Widget builder(BuildContext context, GoRouterState state,
+          StatefulNavigationShell navigationShell) =>
+      buildScaffold(context, state, navigationShell);
+}
+
+// ✅ 공통 브랜치 클래스화
+abstract class Branch extends StatefulShellBranchData {
+  final String initialLocation;
+  final Widget? selectedIcon;
+  final Widget? icon;
+  final String label;
+
+  const Branch({
+    required this.initialLocation,
+    this.selectedIcon,
+    this.icon,
+    required this.label,
+  });
+
+  NavigationDestination get destination => NavigationDestination(
+        icon: icon ?? const SizedBox.shrink(),
+        selectedIcon: selectedIcon,
+        label: label,
+      );
+
+  GlobalKey<NavigatorState> get branchKey;
+}
+
+// ✅ 공통 라우트 클래스화
+abstract class Route extends GoRouteData {
   final Widget child;
   final String? path;
-  const CommonRoute(this.child, {this.path});
+  const Route(this.child, {this.path});
 
   static String? $vaildatePath(String path) {
     if (path.isNotEmpty) return path;
     return null;
   }
 
-  // 에러 대화창 표시
-  void showErrorDialog(BuildContext context, String message);
+  // // 에러 대화창 표시
+  // void showErrorDialog(BuildContext context, String message);
 
   // 인증 여부 확인
   bool checkAuth(BuildContext context);
