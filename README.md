@@ -1,4 +1,4 @@
-# VeryMemo
+# VeryMemo - 2025
 
 ## 1. 프로젝트 명: 
 VeryMemo (베리메모)
