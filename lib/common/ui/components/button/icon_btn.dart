@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:verymemo/common/extensions/widget_extension.dart';
 import 'package:verymemo/common/utils/image_util.dart';
 import 'package:verymemo/common/ui/components/button/button_state.dart';
 import 'dart:math' as math;
@@ -73,8 +74,7 @@ class IconBtn extends StatelessWidget {
       hasRequiredData: iconKey != null,
       hasOnPressed: onTap != null,
     );
-
-    final (_, foregroundColor) = ButtonStateConfig.getButtonColors(
+    final (_, backgroundColor) = ButtonStateConfig.getButtonColors(
       Theme.of(context).colorScheme,
       effectiveState,
     );
@@ -89,15 +89,13 @@ class IconBtn extends StatelessWidget {
         width: math.max(iconSize + padding.horizontal, 44.0),
         height: math.max(iconSize + padding.vertical, 44.0),
         child: Center(
-          child: ImageUtil.showImage(
-            assetPath,
-            size: Size(iconSize, iconSize),
-            color: color ?? foregroundColor,
-          ).paddingOnly(
-            top: padding.top,
-            bottom: padding.bottom,
-            left: padding.left,
-            right: padding.right,
+          child: Padding(
+            padding: padding,
+            child: ImageUtil.showImage(
+              assetPath,
+              size: Size(iconSize, iconSize),
+              color: color ?? backgroundColor,
+            ),
           ),
         ),
       ),

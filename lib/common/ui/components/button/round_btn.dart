@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:verymemo/common/extensions/context_extension.dart';
+>>>>>>> origin/dev-sara
 import 'package:verymemo/common/ui/common/config/config_box_style.dart';
 import 'package:verymemo/common/ui/components/button/button_state.dart';
 
@@ -60,8 +64,8 @@ class RoundBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = context.scheme;
+    final TextTheme textTheme = context.textTheme;
 
     final effectiveState = ButtonStateConfig.getEffectiveState(
       currentState: state,
