@@ -45,4 +45,5 @@ extension ContextExtension on BuildContext {
   /// 3. [Theme]
   ThemeData get theme => Theme.of(this);
   ColorScheme get scheme => theme.colorScheme;
+  TextTheme get textTheme => theme.textTheme;
 }

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/common/ui/components/tab/tab_menu.dart
 import 'package:verymemo/common/ui/components/button/round_btn.dart';
 import 'package:verymemo/common/ui/common/config/config_box_style.dart';
-=======
-import 'package:verymemo/ui/components/button/button_state.dart';
-import 'package:verymemo/ui/components/button/round_btn.dart';
-import 'package:verymemo/ui/common/config/config_box_style.dart';
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리):lib/ui/components/tab/tab_menu.dart
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 
 class TabMenu extends StatefulWidget {
   final Function(int)? onTabChanged;
@@ -43,13 +38,8 @@ class _TabMenuState extends State<TabMenu> {
                 text: _tabs[index],
                 size: BoxSize.extraSmall,
                 state: _selectedIndex == index
-<<<<<<< HEAD:lib/common/ui/components/tab/tab_menu.dart
-                    ? RoundBtnState.black
-                    : RoundBtnState.tertiary,
-=======
-                    ? ButtonState.primary
-                    : ButtonState.transparent,
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리):lib/ui/components/tab/tab_menu.dart
+                    ? ButtonState.black
+                    : ButtonState.tertiary,
                 onPressed: () {
                   setState(() {
                     _selectedIndex = index;
