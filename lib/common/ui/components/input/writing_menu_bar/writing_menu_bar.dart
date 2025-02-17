@@ -73,7 +73,7 @@ class WritingMenuBar extends StatelessWidget {
       case TrailingIcon.tag:
         return _buildIconBtn("tag", onTagTap);
       case TrailingIcon.upload:
-        return _floatingButton("upload", onUploadTap);
+        return IconCircleBtn(iconKey: "upload", onTap: onUploadTap);
     }
   }
 
@@ -92,16 +92,11 @@ class WritingMenuBar extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Text(text, style: Theme.of(context).textTheme.labelLarge),
       ),
     );
-  }
-
-  /// ✅ 아이콘 버튼 (업로드 버튼 → `IconCircleBtn` 사용)
-  Widget _floatingButton(String iconKey, VoidCallback? onTap) {
-    return IconCircleBtn(iconKey: iconKey, onTap: onTap);
   }
 }

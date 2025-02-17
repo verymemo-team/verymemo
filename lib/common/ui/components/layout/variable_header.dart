@@ -88,8 +88,6 @@ class VariableHeader extends StatelessWidget {
         return _searchBarHeader(config, context);
       case HeaderType.imageviewer:
         return _imageViewerHeader(config, context);
-      default:
-        return _dateHeader(config, context); // 기본 헤더 반환
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:verymemo/ui/components/button/button_state.dart';
 import 'dart:math' as math;
 
 /// ✅ 아이콘 크기 (소형, 중형, 대형)
@@ -31,11 +32,6 @@ class IconConfig {
     "edit": "assets/icons/edit.svg",
   };
 
-  /// 📌 기본 온 서페이스
-  static Color getIconColor(BuildContext context, {Color? overrideColor}) {
-    return overrideColor ?? Theme.of(context).colorScheme.onSurface;
-  }
-
   /// 📌 아이콘 크기 가져오기 (기본값 medium)
   static double getIconSize(IconSize size) {
     return iconSizes[size] ?? iconSizes[IconSize.medium]!;
@@ -43,17 +39,19 @@ class IconConfig {
 
   /// 📌 아이콘 경로 가져오기 (기본 아이콘 설정)
   static String getIconPath(String iconKey) {
-    return icons[iconKey] ?? "assets/icons/memo.svg"; // 기본 아이콘 지정 - 수정해야함
+    return icons[iconKey] ?? "assets/icons/memo.svg";
   }
 }
 
 /// ✅ 아이콘 버튼 위젯
 class IconBtn extends StatelessWidget {
-  final String iconKey; // svg 경로
-  final VoidCallback? onTap; // 클릭 이벤트
-  final EdgeInsets padding; // 아이콘 내부 패딩
-  final IconSize size; // 아이콘 크기
-  final Color? color; // 아이콘 색상
+  final String? iconKey;
+  final VoidCallback? onTap;
+  final EdgeInsets padding;
+  final IconSize size;
+  final Color? color;
+  final ButtonState state;
+  final bool autoDisable;
 
   const IconBtn({
     super.key,
@@ -62,20 +60,32 @@ class IconBtn extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
     this.size = IconSize.medium,
     this.color,
+    this.state = ButtonState.primary,
+    this.autoDisable = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final double iconSize = IconConfig.getIconSize(size); // 아이콘 크기
-    final String assetPath = IconConfig.getIconPath(iconKey); // 아이콘 경로
-    final Color iconColor = color ?? IconConfig.getIconColor(context); // 색상
+    final effectiveState = ButtonStateConfig.getEffectiveState(
+      currentState: state,
+      autoDisable: autoDisable,
+      hasRequiredData: iconKey != null,
+      hasOnPressed: onTap != null,
+    );
+
+    final (_, foregroundColor) = ButtonStateConfig.getButtonColors(
+      Theme.of(context).colorScheme,
+      effectiveState,
+    );
+
+    final double iconSize = IconConfig.getIconSize(size);
+    final String assetPath = IconConfig.getIconPath(iconKey ?? '');
 
     return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque, // 투명 영역도 터치 가능하도록 처리
+      onTap: effectiveState == ButtonState.disabled ? null : onTap,
+      behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width:
-            math.max(iconSize + padding.horizontal, 44.0), // 최소 44x44 터치 영역 보장
+        width: math.max(iconSize + padding.horizontal, 44.0),
         height: math.max(iconSize + padding.vertical, 44.0),
         child: Center(
           child: Padding(
@@ -84,7 +94,10 @@ class IconBtn extends StatelessWidget {
               assetPath,
               width: iconSize,
               height: iconSize,
-              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                color ?? foregroundColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
@@ -93,80 +106,58 @@ class IconBtn extends StatelessWidget {
   }
 }
 
-/// 원형 아이콘 스타일 설정
-class CircleIconConfig {
-  static const double buttonSize = 56.0;
-  static const double iconSize = 32.0;
-
-  /// 기본 원형 배경 데코레이션
-  static BoxDecoration getBaseDecoration(
-    BuildContext context, {
-    double opacity = 0.1,
-    Color? backgroundColor,
-  }) {
-    return BoxDecoration(
-      shape: BoxShape.circle,
-      color: (backgroundColor ?? Theme.of(context).colorScheme.primary)
-          .withOpacity(opacity),
-    );
-  }
-
-  /// 플로팅 액션 버튼용 데코레이션
-  static BoxDecoration getFloatingDecoration(BuildContext context) {
-    return getBaseDecoration(
-      context,
-      opacity: 1.0,
-    );
-  }
-
-  /// 일반 원형 배경용 데코레이션
-  static BoxDecoration getDecoration(BuildContext context) {
-    return getBaseDecoration(context);
-  }
-
-  /// 아이콘 색상 필터
-  static ColorFilter getIconColor(BuildContext context, {Color? iconColor}) {
-    return ColorFilter.mode(
-      iconColor ?? Theme.of(context).colorScheme.primary,
-      BlendMode.srcIn,
-    );
-  }
-}
-
 /// ✅ 원형 배경이 있는 아이콘 버튼 위젯
 class IconCircleBtn extends StatelessWidget {
-  final String iconKey;
+  final String? iconKey;
   final VoidCallback? onTap;
+  final Color? backgroundColor;
+  final double? opacity;
+  final double size;
+  final ButtonState state;
+  final bool autoDisable;
 
   const IconCircleBtn({
     super.key,
     required this.iconKey,
     this.onTap,
+    this.backgroundColor,
+    this.opacity,
+    this.size = 56.0,
+    this.state = ButtonState.primary,
+    this.autoDisable = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        width: 56,
-        height: 56,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            IconConfig.getIconPath(iconKey),
-            width: 32,
-            height: 32,
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.primary,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
+    final effectiveState = ButtonStateConfig.getEffectiveState(
+      currentState: state,
+      autoDisable: autoDisable,
+      hasRequiredData: iconKey != null,
+      hasOnPressed: onTap != null,
+    );
+
+    final (bgColor, fgColor) = ButtonStateConfig.getButtonColors(
+      Theme.of(context).colorScheme,
+      effectiveState,
+    );
+
+    final Color effectiveBackground = backgroundColor ?? bgColor;
+    final Color finalBackground = opacity != null
+        ? effectiveBackground.withOpacity(opacity!)
+        : effectiveBackground;
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: finalBackground,
+      ),
+      child: IconBtn(
+        iconKey: iconKey,
+        padding: EdgeInsets.zero,
+        size: IconSize.medium,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }
