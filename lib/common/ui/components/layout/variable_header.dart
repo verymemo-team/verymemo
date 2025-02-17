@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
+import 'package:verymemo/common/utils/image_util.dart';
 
 enum HeaderType { date, logo, content, searchBar, imageviewer }
 
@@ -26,7 +27,7 @@ class HeaderConfig {
       showSearch: true,
       showMore: true,
     ),
-    HeaderType.logo: HeaderConfig(),
+    HeaderType.logo: HeaderConfig(showMore: true),
     HeaderType.content: HeaderConfig(showBackArrow: true),
     HeaderType.searchBar: HeaderConfig(showBackArrow: true, showSearch: true),
     HeaderType.imageviewer: HeaderConfig(
@@ -82,7 +83,7 @@ class VariableHeader extends StatelessWidget {
       case HeaderType.date:
         return _dateHeader(config, context);
       case HeaderType.logo:
-        return _logoHeader();
+        return _logoHeader(config, context);
       case HeaderType.content:
         return _contentHeader(config, context);
       case HeaderType.searchBar:
@@ -123,12 +124,25 @@ class VariableHeader extends StatelessWidget {
     );
   }
 
-  Widget _logoHeader() {
-    return const Center(
-      child: Text(
-        "VERY MEMO",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
+  Widget _logoHeader(HeaderConfig config, BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              ImageUtil.showImage(
+                'assets/images/logo.svg',
+                height: 22,
+              )
+            ],
+          ),
+        ),
+        if (config.showMore)
+          IconBtn(
+              iconKey: "more",
+              onTap: onMore,
+              color: Theme.of(context).colorScheme.onSurface),
+      ],
     );
   }
 

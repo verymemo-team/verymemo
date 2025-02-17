@@ -38,7 +38,7 @@ class MemoList extends StatelessWidget {
               ),
             const SizedBox(height: 4),
             if (memo.imageUrls != null && memo.imageUrls!.isNotEmpty)
-              MemoImages(imageUrls: memo.imageUrls!),
+              MemoImages(memo: memo),
             const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
