@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/common/ui/components/list/memo_list/link_list.dart
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
 import 'package:verymemo/common/ui/components/list/list/list_item.dart';
 import 'package:verymemo/common/ui/components/list/list/config_list_item.dart';
 import 'package:verymemo/common/ui/common/title_subtitle.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
-=======
-import 'package:verymemo/ui/components/list/list/list_item.dart';
-import 'package:verymemo/ui/components/list/list/config_list_item.dart';
-import 'package:verymemo/ui/common/title_subtitle.dart';
-import 'package:verymemo/ui/components/button/icon_btn.dart';
-import 'package:verymemo/ui/components/list/memo_list/memo_list_view_model.dart';
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리):lib/ui/components/list/memo_list/link_list.dart
+import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
 
 class LinkList extends StatelessWidget {
   // final List<MemoListModel> memos;
