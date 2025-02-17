@@ -1,8 +1,12 @@
 part of 'router.dart';
 
+final appRouterInterceptorProvider = Provider<AppRouterInterceptor>((ref) {
+  return AppRouterInterceptor();
+});
+
 class AppRouterInterceptor {
-// class AppRouterInterceptor {
-//   static const String _tokenKey = 'auth_token';
+  // class AppRouterInterceptor {
+  //   static const String _tokenKey = 'auth_token';
 
 //   static Future<String?> redirect(
 //     BuildContext context,

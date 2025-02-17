@@ -1,26 +1,38 @@
 {
-    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
-    // 기존 특성에 대한 설명을 보려면 가리킵니다.
-    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
-    "version": "0.2.0",
-    "configurations": [
-    
-        {
-            "name": "verymemo",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "verymemo (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "verymemo (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
-    ]
-}
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Dev",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main/main_dev.dart",
+      "args": [
+        "--dart-define=API_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pd3h4a3lpamFhd25xcmZxYnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2MTg4NTksImV4cCI6MjA1NTE5NDg1OX0.8HoVnVF2Uj9zO9c0NvDBOEKLhi1UYlrxEUkBfogjmBo"
+      ]
+    },
+    {
+      "name": "Test",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main/main_test.dart",
+      "args": [
+        "--dart-define=API_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pd3h4a3lpamFhd25xcmZxYnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2MTg4NTksImV4cCI6MjA1NTE5NDg1OX0.8HoVnVF2Uj9zO9c0NvDBOEKLhi1UYlrxEUkBfogjmBo"
+      ]
+    },
+    {
+      "name": "Prod",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main/main_prod.dart",
+      "args": [
+        "--dart-define=API_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
+        "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pd3h4a3lpamFhd25xcmZxYnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2MTg4NTksImV4cCI6MjA1NTE5NDg1OX0.8HoVnVF2Uj9zO9c0NvDBOEKLhi1UYlrxEUkBfogjmBo"
+      ]
+    }
+  ]
+} 
