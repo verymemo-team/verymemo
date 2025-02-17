@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
 import 'package:verymemo/common/ui/components/list/pofile_list/profile_list.dart';
 import 'memo_list_model.dart';
 import 'molicure/index_memo_list_component.dart';
+=======
+import 'package:verymemo/common/ui/components/list/pofile_list/profile_list.dart';
+import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
+import 'package:verymemo/common/ui/components/list/memo_list/molicure/index_memo_list_component.dart';
+>>>>>>> origin/dev-sara
 
 class MemoList extends StatelessWidget {
   const MemoList({super.key});

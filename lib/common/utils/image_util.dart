@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,8 +45,6 @@ class ImageUtil {
           height: size?.height,
           color: color,
           colorFilter: colorFilter,
-
-          // color: color ?? Colors.black,
         );
       } else if (path.contains('.json')) {
         return ShowLotti(

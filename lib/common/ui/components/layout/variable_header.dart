@@ -10,7 +10,6 @@ class HeaderConfig {
   final bool showMore;
   final bool showDelete;
   final bool showDownload;
-  final Color? backgroundColor;
 
   const HeaderConfig({
     this.showBackArrow = false,
@@ -19,7 +18,6 @@ class HeaderConfig {
     this.showMore = false,
     this.showDelete = false,
     this.showDownload = false,
-    this.backgroundColor,
   });
 
   static const Map<HeaderType, HeaderConfig> styles = {
@@ -35,7 +33,6 @@ class HeaderConfig {
       showBackArrow: true,
       showSearch: true,
       showMore: true,
-      backgroundColor: Colors.black, //수정해야됨
     ),
   };
 }
@@ -63,14 +60,18 @@ class VariableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HeaderConfig config = HeaderConfig.styles[type]!; // ✅ Config 적용
+    final HeaderConfig config = HeaderConfig.styles[type]!;
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = type == HeaderType.imageviewer
+        ? colorScheme.surfaceContainerHighest
+        : colorScheme.surface;
 
     return SafeArea(
-      bottom: false, // ✅ 하단은 안전영역 반영 안 함
+      bottom: false,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 56,
-        color: config.backgroundColor,
+        color: backgroundColor,
         child: _buildHeaderContent(config, context),
       ),
     );
@@ -101,9 +102,21 @@ class VariableHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            if (config.showSort) IconBtn(iconKey: "sort", onTap: onSort),
-            if (config.showSearch) IconBtn(iconKey: "search", onTap: onSearch),
-            if (config.showMore) IconBtn(iconKey: "more", onTap: onMore),
+            if (config.showSort)
+              IconBtn(
+                  iconKey: "sort",
+                  onTap: onSort,
+                  color: Theme.of(context).colorScheme.onSurface),
+            if (config.showSearch)
+              IconBtn(
+                  iconKey: "search",
+                  onTap: onSearch,
+                  color: Theme.of(context).colorScheme.onSurface),
+            if (config.showMore)
+              IconBtn(
+                  iconKey: "more",
+                  onTap: onMore,
+                  color: Theme.of(context).colorScheme.onSurface),
           ],
         ),
       ],
