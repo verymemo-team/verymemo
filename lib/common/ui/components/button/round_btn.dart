@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:verymemo/common/extensions/context_extension.dart';
->>>>>>> origin/dev-sara
 import 'package:verymemo/common/ui/common/config/config_box_style.dart';
 import 'package:verymemo/common/ui/components/button/button_state.dart';
 
