@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/common/ui/components/list/memo_list/memo_list.dart
 import 'package:verymemo/common/ui/components/list/pofile_list/profile_list.dart';
-import 'memo_list_model.dart';
-=======
-import 'package:verymemo/ui/components/list/memo_list/memo_list_view_model.dart';
-import 'package:verymemo/ui/components/list/pofile_list/profile_list.dart';
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리):lib/ui/components/list/memo_list/memo_list.dart
-import 'molicure/index_memo_list_component.dart';
+import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
+import 'package:verymemo/common/ui/components/list/memo_list/molicure/index_memo_list_component.dart';
 
 class MemoList extends StatelessWidget {
   const MemoList({super.key});

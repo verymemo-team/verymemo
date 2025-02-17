@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
 
@@ -84,6 +85,7 @@ class VariableNavigationBar extends StatelessWidget {
   Widget _navItem(String iconKey, int index, BuildContext context) {
     final bool isHomeNav = type == NavigationBarType.home;
     final bool isSelected = isHomeNav && selectedIndex == index;
+    log("isSelected : $isSelected");
 
     return Expanded(
       child: IconBtn(

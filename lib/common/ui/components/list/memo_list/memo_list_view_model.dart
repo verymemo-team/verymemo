@@ -1,4 +1,4 @@
-import 'package:verymemo/ui/components/list/memo_list/memo_list_model.dart';
+import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
 
 class MemoListViewModel {
 // 데이터와 로직 관리

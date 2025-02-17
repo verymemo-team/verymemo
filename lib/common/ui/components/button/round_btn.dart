@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/common/ui/components/button/round_btn.dart
+import 'package:verymemo/common/extensions/context_extension.dart';
 import 'package:verymemo/common/ui/common/config/config_box_style.dart';
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 
 /// ✅ 버튼 상태 정의 (Primary, Secondary, Tertiary 등)
 enum RoundBtnState {
@@ -11,10 +12,6 @@ enum RoundBtnState {
   black,
   disabled,
 }
-=======
-import 'package:verymemo/ui/common/config/config_box_style.dart';
-import 'package:verymemo/ui/components/button/button_state.dart';
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리):lib/ui/components/button/round_btn.dart
 
 /// ✅ 버튼 스타일 컨피그 (색상, 폰트 스타일 등)
 class RoundBtnConfig {
@@ -64,8 +61,8 @@ class RoundBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = context.scheme;
+    final TextTheme textTheme = context.textTheme;
 
     final effectiveState = ButtonStateConfig.getEffectiveState(
       currentState: state,
