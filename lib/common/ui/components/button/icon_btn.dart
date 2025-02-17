@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:verymemo/ui/components/button/button_state.dart';
+import 'package:verymemo/common/extensions/widget_extension.dart';
+import 'package:verymemo/common/utils/image_util.dart';
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 import 'dart:math' as math;
 
 /// ✅ 아이콘 크기 (소형, 중형, 대형)
@@ -88,17 +89,15 @@ class IconBtn extends StatelessWidget {
         width: math.max(iconSize + padding.horizontal, 44.0),
         height: math.max(iconSize + padding.vertical, 44.0),
         child: Center(
-          child: Padding(
-            padding: padding,
-            child: SvgPicture.asset(
-              assetPath,
-              width: iconSize,
-              height: iconSize,
-              colorFilter: ColorFilter.mode(
-                color ?? foregroundColor,
-                BlendMode.srcIn,
-              ),
-            ),
+          child: ImageUtil.showImage(
+            assetPath,
+            size: Size(iconSize, iconSize),
+            color: color ?? foregroundColor,
+          ).paddingOnly(
+            top: padding.top,
+            bottom: padding.bottom,
+            left: padding.left,
+            right: padding.right,
           ),
         ),
       ),
@@ -157,7 +156,7 @@ class IconCircleBtn extends StatelessWidget {
         iconKey: iconKey,
         padding: EdgeInsets.zero,
         size: IconSize.medium,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: fgColor,
       ),
     );
   }

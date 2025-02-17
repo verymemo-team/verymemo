@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:verymemo/common/ui/common/app_theme.dart';
 import 'package:verymemo/common/ui/components/list/memo_list/link_list.dart';
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
 import 'package:verymemo/common/ui/components/list/memo_list/memo_list.dart';
 import 'package:verymemo/common/ui/components/layout/variable_header.dart';
 import 'package:verymemo/common/ui/components/layout/variable_nevbar.dart';
 import 'package:verymemo/common/ui/components/tab/tab_menu.dart';
-=======
-import 'package:verymemo/ui/common/app_theme.dart';
-import 'package:verymemo/ui/components/list/memo_list/link_list.dart';
-import 'package:verymemo/ui/components/list/memo_list/memo_list.dart';
-import 'package:verymemo/ui/components/layout/variable_header.dart';
-import 'package:verymemo/ui/components/layout/variable_nevbar.dart';
-import 'package:verymemo/ui/components/tab/tab_menu.dart';
->>>>>>> 0f8d0c5 (버튼 스테이트 분리, 리스트 뷰 모델 분리)
 
 void main() {
   runApp(const MyApp());
