@@ -55,21 +55,20 @@ class ModalSelect extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children:
-                options
-                    .map(
-                      (option) => InkWell(
-                        onTap: () => onSelect(option),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 16,
-                          ),
-                          child: Text(option),
-                        ),
+            children: options
+                .map(
+                  (option) => InkWell(
+                    onTap: () => onSelect(option),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
                       ),
-                    )
-                    .toList(),
+                      child: Text(option),
+                    ),
+                  ),
+                )
+                .toList(),
           ),
         ),
       );

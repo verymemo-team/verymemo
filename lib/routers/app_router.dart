@@ -1,6 +1,30 @@
 part of 'router.dart';
 
 // ✅ 인트로 쉘
+@TypedStatefulShellRoute<IntroShell>(
+  branches: [
+    TypedStatefulShellBranch<IntroBranch>(
+      routes: [
+        TypedGoRoute<IntroRoute>(path: AppRoute.intro),
+      ],
+    ),
+    TypedStatefulShellBranch<PermissionCheckBranch>(
+      routes: [
+        TypedGoRoute<PermissionCheckRoute>(path: AppRoute.permissionCheck),
+      ],
+    ),
+    TypedStatefulShellBranch<LoginBranch>(
+      routes: [
+        TypedGoRoute<LoginRoute>(path: AppRoute.login),
+      ],
+    ),
+    TypedStatefulShellBranch<ProfileSettingBranch>(
+      routes: [
+        TypedGoRoute<ProfileSettingRoute>(path: AppRoute.profileSetting),
+      ],
+    ),
+  ],
+)
 class IntroShell extends Shell {
   @override
   GlobalKey<NavigatorState> get shellKey => NavigatorKey.introShellKey;
@@ -18,6 +42,20 @@ class IntroShell extends Shell {
 }
 
 // ✅ 홈 쉘
+@TypedStatefulShellRoute<HomeShell>(
+  branches: [
+    TypedStatefulShellBranch<HomeBranch>(
+      routes: [
+        TypedGoRoute<HomeRoute>(path: AppRoute.home),
+      ],
+    ),
+    TypedStatefulShellBranch<FeedBranch>(
+      routes: [
+        TypedGoRoute<FeedRoute>(path: AppRoute.feed),
+      ],
+    ),
+  ],
+)
 class HomeShell extends Shell {
   @override
   GlobalKey<NavigatorState> get shellKey => NavigatorKey.homeShellKey;
@@ -35,6 +73,30 @@ class HomeShell extends Shell {
 }
 
 // ✅ 디테일 쉘
+@TypedStatefulShellRoute<DetailShell>(
+  branches: [
+    TypedStatefulShellBranch<EditBranch>(
+      routes: [
+        TypedGoRoute<EditRoute>(path: AppRoute.edit),
+      ],
+    ),
+    TypedStatefulShellBranch<DeleteBranch>(
+      routes: [
+        TypedGoRoute<DeleteRoute>(path: AppRoute.delete),
+      ],
+    ),
+    TypedStatefulShellBranch<SearchBranch>(
+      routes: [
+        TypedGoRoute<SearchRoute>(path: AppRoute.search),
+      ],
+    ),
+    TypedStatefulShellBranch<SettingsBranch>(
+      routes: [
+        TypedGoRoute<SettingsRoute>(path: AppRoute.settings),
+      ],
+    ),
+  ],
+)
 class DetailShell extends Shell {
   @override
   GlobalKey<NavigatorState> get shellKey => NavigatorKey.detailShellKey;
@@ -89,6 +151,19 @@ class LoginBranch extends Branch {
         );
 }
 
+// ✅ 프로필세팅 브랜치
+class ProfileSettingBranch extends Branch {
+  @override
+  GlobalKey<NavigatorState> get branchKey =>
+      NavigatorKey.profileSettingBranchKey;
+
+  ProfileSettingBranch()
+      : super(
+          initialLocation: AppRoute.profileSetting,
+          label: "프로필 설정",
+        );
+}
+
 // ✅ 홈 브랜치
 class HomeBranch extends Branch {
   @override
@@ -122,6 +197,40 @@ class EditBranch extends Branch {
             color: Colors.white,
           ),
           label: "수정",
+        );
+}
+
+// ✅ Delete 브랜치
+class DeleteBranch extends Branch {
+  @override
+  GlobalKey<NavigatorState> get branchKey => NavigatorKey.deleteBranchKey;
+
+  DeleteBranch()
+      : super(
+          initialLocation: AppRoute.delete,
+          selectedIcon: ImageUtil.showImage(
+            "assets/icons/delete.svg",
+            color: Colors.white,
+          ),
+          icon: ImageUtil.showImage(
+            "assets/icons/delete.svg",
+          ),
+          label: "삭제",
+        );
+}
+
+// ✅ Feed 브랜치
+class FeedBranch extends Branch {
+  @override
+  GlobalKey<NavigatorState> get branchKey => NavigatorKey.feedBranchKey;
+
+  FeedBranch()
+      : super(
+          initialLocation: AppRoute.feed,
+          selectedIcon: ImageUtil.showImage("assets/icons/feed.svg",
+              color: Color(0xffFF6D75)),
+          icon: ImageUtil.showImage("assets/icons/feed.svg"),
+          label: "피드",
         );
 }
 
@@ -163,37 +272,6 @@ class SettingsBranch extends Branch {
         );
 }
 
-// ✅ UserSetting 브랜치
-class UserSettingBranch extends Branch {
-  @override
-  GlobalKey<NavigatorState> get branchKey => NavigatorKey.userSettingBranchKey;
-
-  UserSettingBranch()
-      : super(
-          initialLocation: AppRoute.userSetting,
-          label: "유저 설정",
-        );
-}
-
-// ✅ Delete 브랜치
-class DeleteBranch extends Branch {
-  @override
-  GlobalKey<NavigatorState> get branchKey => NavigatorKey.deleteBranchKey;
-
-  DeleteBranch()
-      : super(
-          initialLocation: AppRoute.delete,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/delete.svg",
-            color: Colors.white,
-          ),
-          icon: ImageUtil.showImage(
-            "assets/icons/delete_unselected.svg",
-          ),
-          label: "삭제",
-        );
-}
-
 ////////////////////////////////////////////////////////////
 
 // ✅ 인트로 라우터
@@ -223,6 +301,14 @@ class LoginRoute extends Route {
   const LoginRoute() : super(const AuthView());
 }
 
+// ✅ 프로필 설정 라우터
+class ProfileSettingRoute extends Route {
+  @override
+  bool checkAuth(BuildContext context) => false;
+
+  const ProfileSettingRoute() : super(const ProfileSettingView());
+}
+
 // ✅ 홈 라우터
 class HomeRoute extends Route {
   @override
@@ -239,12 +325,20 @@ class EditRoute extends Route {
   const EditRoute() : super(const MemoEditView());
 }
 
-// ✅ 삭제 라우터
-class MemoDeleteRoute extends Route {
+// ✅ 피드 라우터
+class FeedRoute extends Route {
   @override
   bool checkAuth(BuildContext context) => true;
 
-  const MemoDeleteRoute() : super(const MemoDeleteView());
+  const FeedRoute() : super(const FeedView());
+}
+
+// ✅ 삭제 라우터
+class DeleteRoute extends Route {
+  @override
+  bool checkAuth(BuildContext context) => true;
+
+  const DeleteRoute() : super(const MemoDeleteView());
 }
 
 // ✅ 검색 라우터
@@ -261,12 +355,4 @@ class SettingsRoute extends Route {
   bool checkAuth(BuildContext context) => true;
 
   const SettingsRoute() : super(const SettingsView());
-}
-
-// ✅ 유저 설정 라우터
-class UserSettingRoute extends Route {
-  @override
-  bool checkAuth(BuildContext context) => true;
-
-  const UserSettingRoute() : super(const UserSettingView());
 }

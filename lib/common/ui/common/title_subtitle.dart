@@ -101,23 +101,6 @@ class TitleSubtitlePresets {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
 
 // enum TitleSize { small, medium, large }
@@ -152,7 +135,6 @@ class TitleSubtitlePresets {
 //     return Theme.of(context).textTheme.bodyMedium!;
 //   }
 
-
 //   Widget getTitleSubtitle(
 //     BuildContext context, {
 //     required String title,
@@ -179,7 +161,6 @@ class TitleSubtitlePresets {
 //   }
 // }
 
-
 // //타이틀 서브타이틀 위젯
 // class TitleSubtitleWidget extends StatelessWidget {
 //   final String title;
@@ -205,7 +186,6 @@ class TitleSubtitlePresets {
 //     );
 //   }
 // }
-
 
 // //타이틀 서브타이틀 프리셋
 // extension TitleSubtitlePresets on TitleSubtitleConfig {

@@ -8,15 +8,19 @@ abstract class AppRoute {
 
   static const home = "/home";
   static const edit = "/edit";
+  static const feed = "/feed";
   static const delete = "/delete";
   static const search = "/search";
   static const settings = "/settings";
 
-  static const userSetting = "/userSetting";
+  static const profileSetting = "/profileSetting";
 }
 
 // ✅ Navigator Key
 abstract class NavigatorKey {
+  static final GlobalKey<NavigatorState> routerKey =
+      GlobalKey<NavigatorState>(debugLabel: "routerKey");
+
   static final GlobalKey<NavigatorState> introShellKey =
       GlobalKey<NavigatorState>(debugLabel: "introShellKey");
 
@@ -41,14 +45,17 @@ abstract class NavigatorKey {
   static final GlobalKey<NavigatorState> editBranchKey =
       GlobalKey<NavigatorState>(debugLabel: "editBranchKey");
 
+  static final GlobalKey<NavigatorState> feedBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "feedBranchKey");
+
   static final GlobalKey<NavigatorState> searchBranchKey =
       GlobalKey<NavigatorState>(debugLabel: "searchBranchKey");
 
   static final GlobalKey<NavigatorState> settingsBranchKey =
       GlobalKey<NavigatorState>(debugLabel: "settingsBranchKey");
 
-  static final GlobalKey<NavigatorState> userSettingBranchKey =
-      GlobalKey<NavigatorState>(debugLabel: "userSettingBranchKey");
+  static final GlobalKey<NavigatorState> profileSettingBranchKey =
+      GlobalKey<NavigatorState>(debugLabel: "profileSettingBranchKey");
 
   static final GlobalKey<NavigatorState> deleteBranchKey =
       GlobalKey<NavigatorState>(debugLabel: "deleteBranchKey");
