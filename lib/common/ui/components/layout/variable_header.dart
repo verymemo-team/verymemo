@@ -151,6 +151,7 @@ class VariableHeader extends StatelessWidget {
             height: 40,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),

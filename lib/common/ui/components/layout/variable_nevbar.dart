@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
 
 enum NavigationBarType { home, content }
@@ -103,10 +104,11 @@ class VariableNavigationBar extends StatelessWidget {
   Widget _floatingButton(BuildContext context) {
     return IconCircleBtn(
       iconKey: "edit",
+      state: ButtonState.primary,
       circleSize: CircleButtonSize.medium,
       backgroundColor: Theme.of(context).colorScheme.inverseSurface,
       onTap: () {
-        print("플로팅 버튼 클릭됨!");
+        ("플로팅 버튼 클릭됨!");
       },
     );
   }

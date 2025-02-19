@@ -87,6 +87,7 @@ class ImageUtil {
             height: layout.maxHeight > offset
                 ? layout.maxHeight - offset
                 : double.infinity,
+            // ignore: deprecated_member_use
             color: color ?? Colors.black.withOpacity(0.4),
             child: showImage(
               path,

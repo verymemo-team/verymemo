@@ -160,6 +160,7 @@ class IconCircleBtn extends StatelessWidget {
 
     final Color effectiveBackground = backgroundColor ?? bgColor;
     final Color finalBackground = opacity != null
+        // ignore: deprecated_member_use
         ? effectiveBackground.withOpacity(opacity!)
         : effectiveBackground;
 

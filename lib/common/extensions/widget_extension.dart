@@ -95,6 +95,7 @@ extension WidgetExtension on Widget {
   /// [Color Filter]
   Widget colorFiltered(Color color) => ColorFiltered(
         colorFilter: ColorFilter.mode(
+          // ignore: deprecated_member_use
           color.withOpacity(0.5),
           BlendMode.darken,
         ),
@@ -111,6 +112,7 @@ extension WidgetExtension on Widget {
       IgnorePointer(
         ignoring: ignoring,
         child: Container(
+          // ignore: deprecated_member_use
           color: color?.withOpacity(0.3),
           child: this,
         ),
