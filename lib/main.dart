@@ -5,6 +5,7 @@ import 'package:verymemo/common/ui/components/list/memo_list/memo_list.dart';
 import 'package:verymemo/common/ui/components/layout/variable_header.dart';
 import 'package:verymemo/common/ui/components/layout/variable_nevbar.dart';
 import 'package:verymemo/common/ui/components/tab/tab_menu.dart';
+import 'package:verymemo/common/ui/components/modal/modal_select.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,17 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  VariableHeader(
-                    type: HeaderType.date,
-                    onSort: () => debugPrint("정렬 클릭"),
-                    onSearch: () => debugPrint("검색 클릭"),
-                    onMore: () => debugPrint("더보기 클릭"),
-                    onBack: () => debugPrint("뒤로 가기 클릭"),
-                  ),
-                ],
-              ),
+              child: Column(children: [
+                VariableHeader(
+                  type: HeaderType.date,
+                  onSort: () => debugPrint("정렬 클릭"),
+                  onSearch: () => debugPrint("검색 클릭"),
+                  onMore: () => debugPrint("더보기 클릭"),
+                  onBack: () => debugPrint("뒤로 가기 클릭"),
+                ),
+              ]),
             ),
             SliverPersistentHeader(
               pinned: true,

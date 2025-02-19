@@ -1,16 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/common/config/config_box_style.dart';
 
 class ModalSelect extends StatelessWidget {
   final List<String> options;
   final void Function(String) onSelect;
   final bool isLarge; // 스몰/라지 모드 구분
+  final List<bool> isHighlighted; // 강조 표시 여부를 저장하는 리스트 추가
 
   const ModalSelect({
     super.key,
     required this.options,
     required this.onSelect,
     this.isLarge = false, // 기본값: 스몰 모드
+    this.isHighlighted = const [], // 기본값으로 빈 리스트 설정
   });
 
   @override
@@ -18,26 +21,37 @@ class ModalSelect extends StatelessWidget {
     bool isMobile = MediaQuery.of(context).size.width < 600 && !kIsWeb;
 
     if (isMobile) {
-      // 모바일: 모달로 표시
       return Dialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-        ),
-        child: Container(
-          constraints: BoxConstraints(maxHeight: isLarge ? 600 : 400),
-          padding: const EdgeInsets.all(16),
-          child: ListView.separated(
-            itemCount: options.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(options[index]),
-                onTap: () {
-                  onSelect(options[index]);
-                  Navigator.of(context).pop();
-                },
-              );
-            },
+        alignment: Alignment.bottomCenter,
+        insetPadding: EdgeInsets.zero,
+        child: BoxConfig.createContainer(
+          context: context,
+          size: BoxSize.large,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              ...List.generate(
+                options.length,
+                (index) => ListTile(
+                  title: Text(
+                    options[index],
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: isHighlighted.length > index &&
+                                  isHighlighted[index]
+                              ? Theme.of(context).colorScheme.error
+                              : null,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {
+                    onSelect(options[index]);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              const SizedBox(height: 32), // 하단 여백 추가
+            ],
           ),
         ),
       );
@@ -64,7 +78,16 @@ class ModalSelect extends StatelessWidget {
                         vertical: 12,
                         horizontal: 16,
                       ),
-                      child: Text(option),
+                      child: Text(
+                        option,
+                        style: TextStyle(
+                          color:
+                              isHighlighted.length > options.indexOf(option) &&
+                                      isHighlighted[options.indexOf(option)]
+                                  ? Colors.red
+                                  : null,
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -73,6 +96,42 @@ class ModalSelect extends StatelessWidget {
         ),
       );
     }
+  }
+
+  static Future<void> show({
+    required BuildContext context,
+    required List<String> options,
+    required Function(String) onSelect,
+    bool isLarge = false,
+    List<bool> isHighlighted = const [], // show 메서드에도 매개변수 추가
+  }) {
+    return showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: '',
+      barrierColor: Theme.of(context).colorScheme.scrim,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation1, animation2) => ModalSelect(
+        options: options,
+        onSelect: onSelect,
+        isLarge: isLarge,
+        isHighlighted: isHighlighted, // 매개변수 전달
+      ),
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final slideAnimation = Tween(
+          begin: const Offset(0, 1),
+          end: const Offset(0, 0),
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOut,
+        ));
+
+        return SlideTransition(
+          position: slideAnimation,
+          child: child,
+        );
+      },
+    );
   }
 }
 
@@ -152,6 +211,10 @@ class ModalSelect extends StatelessWidget {
 //           ),
 //         ],
 //       ),
+//     );
+//   }
+// }
+
 //     );
 //   }
 // }

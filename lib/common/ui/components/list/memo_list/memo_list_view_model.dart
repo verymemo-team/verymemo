@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/modal/modal_select.dart';
 
 class MemoListViewModel extends ChangeNotifier {
 // 데이터와 로직 관리
@@ -92,4 +94,40 @@ class MemoListViewModel extends ChangeNotifier {
 
   bool shouldShowRemainingCount(List<String>? imageUrls, int index) =>
       index == 4 && getRemainingCount(imageUrls) > 0;
+
+//모달
+  void handleMemoLongPress(BuildContext context, MemoListModel memo) {
+    ModalSelect.show(
+      context: context,
+      options: ['수정', '북마크', '공유', '공개', '삭제'],
+      onSelect: (value) => _handleModalSelection(value, memo),
+      isHighlighted: [false, false, false, true, true],
+    );
+  }
+
+  void _handleModalSelection(String value, MemoListModel memo) {
+    switch (value) {
+      case '수정하기':
+        _editMemo(memo);
+        break;
+      case '삭제하기':
+        _deleteMemo(memo);
+        break;
+      case '공유하기':
+        _shareMemo(memo);
+        break;
+    }
+  }
+
+  void _editMemo(MemoListModel memo) {
+    // 수정 로직 구현
+  }
+
+  void _deleteMemo(MemoListModel memo) {
+    // 삭제 로직 구현
+  }
+
+  void _shareMemo(MemoListModel memo) {
+    // 공유 로직 구현
+  }
 }

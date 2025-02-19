@@ -24,7 +24,7 @@ class AppColor {
   static const grey0 = Color(0xffFBFBFB);
   static const hover = Color(0xffF7F7F7);
   static const white = Color(0xffffffff);
-  static const modal = Color(0x80000000);
+  static const modal = Color(0x99000000);
 }
 
 ColorScheme lightThemeColors(context) {

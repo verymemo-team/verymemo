@@ -39,7 +39,7 @@ class _TabMenuState extends State<TabMenu> {
                 size: BoxSize.extraSmall,
                 state: _selectedIndex == index
                     ? ButtonState.black
-                    : ButtonState.tertiary,
+                    : ButtonState.transparent,
                 onPressed: () {
                   setState(() {
                     _selectedIndex = index;
