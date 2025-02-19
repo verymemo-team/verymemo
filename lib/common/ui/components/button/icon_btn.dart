@@ -6,6 +6,13 @@ import 'dart:math' as math;
 /// ✅ 아이콘 크기 (소형, 중형, 대형)
 enum IconSize { small, medium, large }
 
+/// ✅ 원형 버튼 크기
+enum CircleButtonSize {
+  small, // 32.0
+  medium, // 40.0
+  large, // 56.0
+}
+
 /// ✅ 아이콘 설정 (경로, 크기, 색상)
 class IconConfig {
   /// 📌 크기별 아이콘 사이즈 정의
@@ -30,6 +37,11 @@ class IconConfig {
     "bookmark": "assets/icons/bookmark.svg",
     "upload": "assets/icons/upload.svg",
     "edit": "assets/icons/edit.svg",
+    "arrow-up": "assets/icons/arrow-up.svg",
+    "tag": "assets/icons/tag.svg",
+    "camera": "assets/icons/camera.svg",
+    "gallery": "assets/icons/gallery.svg",
+    "link": "assets/icons/link.svg",
   };
 
   /// 📌 아이콘 크기 가져오기 (기본값 medium)
@@ -41,13 +53,24 @@ class IconConfig {
   static String getIconPath(String iconKey) {
     return icons[iconKey] ?? "assets/icons/memo.svg";
   }
+
+  /// 📌 원형 버튼 크기 정의
+  static const Map<CircleButtonSize, double> circleSizes = {
+    CircleButtonSize.small: 36.0, //라이팅 메뉴 바
+    CircleButtonSize.medium: 48.0, //네브바 플로팅 (디자인 / 아직 안 씀)
+    CircleButtonSize.large: 56.0, //이걸로 통일 중
+  };
+
+  /// 📌 원형 버튼 크기 가져오기 (기본값 large)
+  static double getCircleSize(CircleButtonSize size) {
+    return circleSizes[size] ?? circleSizes[CircleButtonSize.large]!;
+  }
 }
 
 /// ✅ 아이콘 버튼 위젯
 class IconBtn extends StatelessWidget {
   final String? iconKey;
   final VoidCallback? onTap;
-  final EdgeInsets padding;
   final IconSize size;
   final Color? color;
   final ButtonState state;
@@ -57,10 +80,9 @@ class IconBtn extends StatelessWidget {
     super.key,
     required this.iconKey,
     this.onTap,
-    this.padding = const EdgeInsets.all(8.0),
     this.size = IconSize.medium,
     this.color,
-    this.state = ButtonState.primary,
+    this.state = ButtonState.transparent,
     this.autoDisable = false,
   });
 
@@ -72,7 +94,7 @@ class IconBtn extends StatelessWidget {
       hasRequiredData: iconKey != null,
       hasOnPressed: onTap != null,
     );
-    final (_, backgroundColor) = ButtonStateConfig.getButtonColors(
+    final (bgColor, fgColor) = ButtonStateConfig.getButtonColors(
       Theme.of(context).colorScheme,
       effectiveState,
     );
@@ -84,15 +106,15 @@ class IconBtn extends StatelessWidget {
       onTap: effectiveState == ButtonState.disabled ? null : onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: math.max(iconSize + padding.horizontal, 44.0),
-        height: math.max(iconSize + padding.vertical, 44.0),
+        width: math.max(iconSize, 44.0),
+        height: math.max(iconSize, 44.0),
         child: Center(
-          child: Padding(
-            padding: padding,
-            child: ImageUtil.showImage(
-              assetPath,
-              size: Size(iconSize, iconSize),
-              color: color ?? backgroundColor,
+          child: ImageUtil.showImage(
+            assetPath,
+            size: Size(iconSize, iconSize),
+            colorFilter: ColorFilter.mode(
+              color ?? fgColor,
+              BlendMode.srcIn,
             ),
           ),
         ),
@@ -107,7 +129,7 @@ class IconCircleBtn extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? backgroundColor;
   final double? opacity;
-  final double size;
+  final CircleButtonSize circleSize;
   final ButtonState state;
   final bool autoDisable;
 
@@ -117,7 +139,7 @@ class IconCircleBtn extends StatelessWidget {
     this.onTap,
     this.backgroundColor,
     this.opacity,
-    this.size = 56.0,
+    this.circleSize = CircleButtonSize.large,
     this.state = ButtonState.primary,
     this.autoDisable = false,
   });
@@ -142,16 +164,17 @@ class IconCircleBtn extends StatelessWidget {
         : effectiveBackground;
 
     return Container(
-      width: size,
-      height: size,
+      width: IconConfig.getCircleSize(circleSize),
+      height: IconConfig.getCircleSize(circleSize),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: finalBackground,
       ),
       child: IconBtn(
         iconKey: iconKey,
-        padding: EdgeInsets.zero,
-        size: IconSize.medium,
+        size: circleSize == CircleButtonSize.small
+            ? IconSize.small
+            : IconSize.medium,
         color: fgColor,
       ),
     );

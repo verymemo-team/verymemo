@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/ui/common/app_theme.dart';
+import 'package:verymemo/common/ui/components/input/writing_menu_bar/writing_menu_bar.dart';
 import 'package:verymemo/common/ui/components/list/memo_list/link_list.dart';
 import 'package:verymemo/common/ui/components/list/memo_list/memo_list.dart';
 import 'package:verymemo/common/ui/components/layout/variable_header.dart';
@@ -53,12 +54,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: VariableHeader(
-                type: HeaderType.date,
-                onSort: () => debugPrint("정렬 클릭"),
-                onSearch: () => debugPrint("검색 클릭"),
-                onMore: () => debugPrint("더보기 클릭"),
-                onBack: () => debugPrint("뒤로 가기 클릭"),
+              child: Column(
+                children: [
+                  VariableHeader(
+                    type: HeaderType.date,
+                    onSort: () => debugPrint("정렬 클릭"),
+                    onSearch: () => debugPrint("검색 클릭"),
+                    onMore: () => debugPrint("더보기 클릭"),
+                    onBack: () => debugPrint("뒤로 가기 클릭"),
+                  ),
+                  WritingMenuBar(
+                    onCameraTap: () => debugPrint("카메라 클릭"),
+                    onGalleryTap: () => debugPrint("갤러리 클릭"),
+                    onLinkTap: () => debugPrint("링크 클릭"),
+                    onPrivacyTap: () => debugPrint("비공개 클릭"),
+                    onTagTap: () => debugPrint("태그 클릭"),
+                    onUploadTap: () => debugPrint("업로드 클릭"),
+                  ),
+                ],
               ),
             ),
             SliverPersistentHeader(

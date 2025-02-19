@@ -1,3 +1,5 @@
+import 'package:verymemo/common/ui/components/button/icon_btn.dart';
+
 /// ✅ Leading 아이콘 타입
 enum LeadingIcon {
   camera,
@@ -27,4 +29,7 @@ class WritingMenuBarConfig {
     // TrailingIcon.tag,
     TrailingIcon.upload,
   ];
+
+  /// 📌 아이콘 크기 설정
+  static const IconSize iconSize = IconSize.small; // 20.0 크기로 설정
 }

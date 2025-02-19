@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 import 'package:verymemo/common/ui/components/button/round_btn.dart';
 import 'package:verymemo/common/ui/common/title_subtitle.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
@@ -28,7 +29,11 @@ class ModalPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // 아이콘 섹션
-            IconCircleBtn(iconKey: 'check', onTap: () {}),
+            IconCircleBtn(
+              iconKey: 'check',
+              onTap: () {},
+              state: ButtonState.secondary,
+            ),
             const SizedBox(height: 12),
 
             // 텍스트 섹션

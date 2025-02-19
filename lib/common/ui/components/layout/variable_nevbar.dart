@@ -103,7 +103,7 @@ class VariableNavigationBar extends StatelessWidget {
   Widget _floatingButton(BuildContext context) {
     return IconCircleBtn(
       iconKey: "edit",
-      size: NavigationBarConfig.floatingButtonSize,
+      circleSize: CircleButtonSize.medium,
       backgroundColor: Theme.of(context).colorScheme.inverseSurface,
       onTap: () {
         print("플로팅 버튼 클릭됨!");

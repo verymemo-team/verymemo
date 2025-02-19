@@ -103,21 +103,9 @@ class VariableHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            if (config.showSort)
-              IconBtn(
-                  iconKey: "sort",
-                  onTap: onSort,
-                  color: Theme.of(context).colorScheme.onSurface),
-            if (config.showSearch)
-              IconBtn(
-                  iconKey: "search",
-                  onTap: onSearch,
-                  color: Theme.of(context).colorScheme.onSurface),
-            if (config.showMore)
-              IconBtn(
-                  iconKey: "more",
-                  onTap: onMore,
-                  color: Theme.of(context).colorScheme.onSurface),
+            if (config.showSort) IconBtn(iconKey: "sort", onTap: onSort),
+            if (config.showSearch) IconBtn(iconKey: "search", onTap: onSearch),
+            if (config.showMore) IconBtn(iconKey: "more", onTap: onMore),
           ],
         ),
       ],
@@ -133,15 +121,15 @@ class VariableHeader extends StatelessWidget {
               ImageUtil.showImage(
                 'assets/images/logo.svg',
                 height: 22,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onSurface,
+                  BlendMode.srcIn,
+                ),
               )
             ],
           ),
         ),
-        if (config.showMore)
-          IconBtn(
-              iconKey: "more",
-              onTap: onMore,
-              color: Theme.of(context).colorScheme.onSurface),
+        if (config.showMore) IconBtn(iconKey: "more", onTap: onMore),
       ],
     );
   }
