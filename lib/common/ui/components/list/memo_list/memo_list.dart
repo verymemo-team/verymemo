@@ -47,7 +47,8 @@ class MemoList extends StatelessWidget {
             const SizedBox(height: 4),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Divider(),
+              child: Divider(
+              ),
             ),
           ],
         );

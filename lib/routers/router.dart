@@ -14,6 +14,7 @@ import 'package:verymemo/features/feed/presentation/feed_view.dart';
 import 'package:verymemo/features/memo/presentation/memo_delete_view.dart';
 import 'package:verymemo/features/memo/presentation/memo_edit_view.dart';
 import 'package:verymemo/features/memo/presentation/memo_home_view.dart';
+import 'package:verymemo/features/memo/presentation/memo_writing_view.dart';
 import 'package:verymemo/features/saerch/presentation/search_view.dart';
 import 'package:verymemo/features/settings/presentation/intro/intro_view.dart';
 import 'package:verymemo/features/settings/presentation/permission/permission_view.dart';

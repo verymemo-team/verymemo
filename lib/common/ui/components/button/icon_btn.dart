@@ -102,9 +102,8 @@ class IconBtn extends StatelessWidget {
     final double iconSize = IconConfig.getIconSize(size);
     final String assetPath = IconConfig.getIconPath(iconKey ?? '');
 
-    return GestureDetector(
+    return InkWell(
       onTap: effectiveState == ButtonState.disabled ? null : onTap,
-      behavior: HitTestBehavior.opaque,
       child: SizedBox(
         width: math.max(iconSize, 44.0),
         height: math.max(iconSize, 44.0),
@@ -125,23 +124,21 @@ class IconBtn extends StatelessWidget {
 
 /// ✅ 원형 배경이 있는 아이콘 버튼 위젯
 class IconCircleBtn extends StatelessWidget {
-  final String? iconKey;
-  final VoidCallback? onTap;
-  final Color? backgroundColor;
-  final double? opacity;
-  final CircleButtonSize circleSize;
+  final String iconKey;
   final ButtonState state;
+  final CircleButtonSize circleSize;
+  final Color? backgroundColor;
   final bool autoDisable;
+  final VoidCallback? onTap;
 
   const IconCircleBtn({
     super.key,
     required this.iconKey,
-    this.onTap,
-    this.backgroundColor,
-    this.opacity,
-    this.circleSize = CircleButtonSize.large,
     this.state = ButtonState.primary,
+    this.circleSize = CircleButtonSize.medium,
     this.autoDisable = false,
+    this.backgroundColor,
+    this.onTap,
   });
 
   @override
@@ -149,7 +146,7 @@ class IconCircleBtn extends StatelessWidget {
     final effectiveState = ButtonStateConfig.getEffectiveState(
       currentState: state,
       autoDisable: autoDisable,
-      hasRequiredData: iconKey != null,
+      hasRequiredData: true,
       hasOnPressed: onTap != null,
     );
 
@@ -158,25 +155,20 @@ class IconCircleBtn extends StatelessWidget {
       effectiveState,
     );
 
-    final Color effectiveBackground = backgroundColor ?? bgColor;
-    final Color finalBackground = opacity != null
-        // ignore: deprecated_member_use
-        ? effectiveBackground.withOpacity(opacity!)
-        : effectiveBackground;
-
-    return Container(
-      width: IconConfig.getCircleSize(circleSize),
-      height: IconConfig.getCircleSize(circleSize),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: finalBackground,
-      ),
-      child: IconBtn(
-        iconKey: iconKey,
-        size: circleSize == CircleButtonSize.small
-            ? IconSize.small
-            : IconSize.medium,
-        color: fgColor,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: IconConfig.getCircleSize(circleSize),
+        height: IconConfig.getCircleSize(circleSize),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: backgroundColor ?? bgColor,
+        ),
+        child: IconBtn(
+          iconKey: iconKey,
+          size: IconSize.medium,
+          color: fgColor,
+        ),
       ),
     );
   }

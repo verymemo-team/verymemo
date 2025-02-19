@@ -27,12 +27,14 @@ class VariableNavigationBar extends StatelessWidget {
   final NavigationBarType type;
   final int selectedIndex;
   final ValueChanged<int>? onItemSelected;
+  final VoidCallback? onFloatingButtonTap;
 
   const VariableNavigationBar({
     super.key,
     required this.type,
     required this.selectedIndex,
     this.onItemSelected,
+    this.onFloatingButtonTap,
   });
 
   @override
@@ -104,11 +106,14 @@ class VariableNavigationBar extends StatelessWidget {
   Widget _floatingButton(BuildContext context) {
     return IconCircleBtn(
       iconKey: "edit",
-      state: ButtonState.primary,
+      state: ButtonState.black,
       circleSize: CircleButtonSize.medium,
       backgroundColor: Theme.of(context).colorScheme.inverseSurface,
       onTap: () {
-        ("플로팅 버튼 클릭됨!");
+        debugPrint("Floating button tapped");
+        if (onFloatingButtonTap != null) {
+          onFloatingButtonTap!();
+        }
       },
     );
   }
