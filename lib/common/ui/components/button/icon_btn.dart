@@ -42,6 +42,11 @@ class IconConfig {
     "camera": "assets/icons/camera.svg",
     "gallery": "assets/icons/gallery.svg",
     "link": "assets/icons/link.svg",
+    "phone": "assets/icons/phone.svg",
+    "star": "assets/icons/star.svg",
+    "trash": "assets/icons/trash.svg",
+    "mic": "assets/icons/mic.svg",
+    "sync": "assets/icons/sync.svg",
   };
 
   /// 📌 아이콘 크기 가져오기 (기본값 medium)
