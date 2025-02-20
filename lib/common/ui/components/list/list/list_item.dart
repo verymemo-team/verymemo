@@ -6,7 +6,7 @@ import 'package:verymemo/common/ui/components/list/list/config_list_item.dart';
 class ListItem extends StatelessWidget {
   final ListItemConfig config;
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final String? leadingImageUrl;
   final VoidCallback? onTap;
 
@@ -14,7 +14,7 @@ class ListItem extends StatelessWidget {
     super.key,
     required this.config,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     this.leadingImageUrl,
     this.onTap,
   });
@@ -65,7 +65,8 @@ class ListItem extends StatelessWidget {
   /// ✅ 타이틀 & 서브타이틀 빌드
   Widget _buildTitleSubtitle(BuildContext context) {
     return GestureDetector(
-      onTap: () => debugPrint("타이틀/서브타이틀 영역 클릭!"),
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
       child: TitleSubtitleWidget(
         title: title,
         subtitle: subtitle,
@@ -87,10 +88,7 @@ class ListItem extends StatelessWidget {
               )
             : const SizedBox();
       case ListItemType.toggle:
-        return Switch(
-          value: config.toggleValue ?? false,
-          onChanged: config.onToggleChanged,
-        );
+        return _buildToggle();
       default:
         return const SizedBox();
     }
@@ -122,6 +120,8 @@ class ListItem extends StatelessWidget {
     return Switch(
       value: config.toggleValue ?? false,
       onChanged: config.onToggleChanged,
+      inactiveTrackColor: Colors.grey[300],
+      inactiveThumbColor: Colors.white,
     );
   }
 }

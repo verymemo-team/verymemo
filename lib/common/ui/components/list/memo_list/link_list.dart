@@ -46,6 +46,7 @@ class LinkList extends StatelessWidget {
             trailingIconKey: 'memo',
             trailingIconSize: IconSize.small,
             textConfig: TitleSubtitlePresets.listItem,
+            itemSpacing: 12,
           ),
           onTap: () => onLinkTap?.call(link.url),
         );
