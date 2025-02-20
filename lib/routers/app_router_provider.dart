@@ -2,18 +2,24 @@ part of 'router.dart';
 
 final appRouterProvider = Provider<AppRouter>((ref) {
   final interceptor = ref.watch(appRouterInterceptorProvider);
-  return AppRouter(interceptor);
+  return AppRouter(interceptor, ref);
 });
 
 class AppRouter {
   final AppRouterInterceptor interceptor;
+  final Ref ref;
 
-  AppRouter(this.interceptor);
+  AppRouter(this.interceptor, this.ref);
   late final config = GoRouter(
-    initialLocation: AppRoute.home,
+    initialLocation: AppRoute.intro,
     navigatorKey: NavigatorKey.routerKey,
     debugLogDiagnostics: true,
     routes: $appRoutes,
+    redirect: (context, state) async {
+      return state.path != null
+          ? await interceptor.redirect(context, state, ref)
+          : null;
+    },
   );
 }
 

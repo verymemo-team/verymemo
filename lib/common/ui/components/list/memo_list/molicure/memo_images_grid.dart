@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/utils/image_util.dart';
 
 class MemoImagesGrid extends StatelessWidget {
   final List<String> imageUrls;
@@ -25,10 +26,11 @@ class MemoImagesGrid extends StatelessWidget {
               ? Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.network(
-                      url,
-                      fit: BoxFit.cover,
-                    ),
+                    // Image.network(
+                    //   url,
+                    //   fit: BoxFit.cover,
+                    // ),
+                    ImageUtil.showImage(url, fit: BoxFit.cover),
                     Container(
                       color: Theme.of(context).colorScheme.surfaceDim,
                       child: Center(

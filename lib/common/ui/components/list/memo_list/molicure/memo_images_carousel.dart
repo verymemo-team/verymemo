@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/utils/image_util.dart';
 
 class MemoImagesCarousel extends StatelessWidget {
   final List<String> imageUrls;
@@ -32,10 +33,15 @@ class MemoImagesCarousel extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
+                  // child: Image.network(
+                  //   imageUrls[index],
+                  //   width: imageSize,
+                  //   height: imageSize,
+                  //   fit: BoxFit.cover,
+                  // ),
+                  child: ImageUtil.showImage(
                     imageUrls[index],
-                    width: imageSize,
-                    height: imageSize,
+                    size: Size(imageSize, imageSize),
                     fit: BoxFit.cover,
                   ),
                 ),

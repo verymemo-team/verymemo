@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/utils/image_util.dart';
 import 'package:verymemo/common/ui/components/button/button_state.dart';
