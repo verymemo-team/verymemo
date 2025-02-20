@@ -9,14 +9,15 @@ enum BoxSize {
 
 class BoxConfig {
   static Widget createContainer({
+    required BuildContext context,
     required BoxSize size,
-    required Color backgroundColor,
     required Widget child,
+    Color? backgroundColor,
   }) {
     return Container(
       padding: _getPadding(size),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: backgroundColor ?? Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(_getRadius(size)),
       ),
       child: child,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/button/button_state.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
 import 'package:verymemo/common/ui/components/input/writing_menu_bar/config_writing_menu_bar.dart';
 
@@ -57,11 +58,22 @@ class WritingMenuBar extends StatelessWidget {
   Widget _buildLeadingIcon(LeadingIcon icon, BuildContext context) {
     switch (icon) {
       case LeadingIcon.camera:
-        return _buildIconBtn("camera", onCameraTap);
+        return IconBtn(
+          iconKey: "camera",
+          onTap: onCameraTap,
+          size: WritingMenuBarConfig.iconSize,
+        );
       case LeadingIcon.gallery:
-        return _buildIconBtn("gallery", onGalleryTap);
+        return IconBtn(
+          iconKey: "gallery",
+          onTap: onGalleryTap,
+          size: WritingMenuBarConfig.iconSize,
+        );
       case LeadingIcon.link:
-        return _buildIconBtn("link", onLinkTap);
+        return IconBtn(
+          iconKey: "link",
+          onTap: onLinkTap,
+        );
       case LeadingIcon.privacy:
         return _textButton("비공개", onPrivacyTap, context);
     }
@@ -71,21 +83,23 @@ class WritingMenuBar extends StatelessWidget {
   Widget _buildTrailingIcon(TrailingIcon icon, BuildContext context) {
     switch (icon) {
       case TrailingIcon.tag:
-        return _buildIconBtn("tag", onTagTap);
+        return IconBtn(
+          iconKey: "tag",
+          onTap: onTagTap,
+          size: WritingMenuBarConfig.iconSize,
+        );
       case TrailingIcon.upload:
-        return IconCircleBtn(iconKey: "upload", onTap: onUploadTap);
+        return IconCircleBtn(
+          iconKey: "arrow-up",
+          onTap: onUploadTap,
+          autoDisable: true,
+          state: ButtonState.disabled,
+          circleSize: CircleButtonSize.small,
+        );
     }
   }
 
-  /// ✅ 기본 아이콘 버튼
-  Widget _buildIconBtn(String iconKey, VoidCallback? onTap) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: IconBtn(iconKey: iconKey, onTap: onTap),
-    );
-  }
-
-  /// ✅ 텍스트 버튼 (비공개 버튼)
+  /// ✅ 텍스트 버튼 (비공개 버튼 - 나중에 만들기)
   Widget _textButton(String text, VoidCallback? onTap, BuildContext context) {
     return GestureDetector(
       onTap: onTap,

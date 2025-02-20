@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
+import 'package:verymemo/common/utils/image_util.dart';
 
 enum HeaderType { date, logo, content, searchBar, imageviewer }
 
@@ -26,7 +27,7 @@ class HeaderConfig {
       showSearch: true,
       showMore: true,
     ),
-    HeaderType.logo: HeaderConfig(),
+    HeaderType.logo: HeaderConfig(showMore: true),
     HeaderType.content: HeaderConfig(showBackArrow: true),
     HeaderType.searchBar: HeaderConfig(showBackArrow: true, showSearch: true),
     HeaderType.imageviewer: HeaderConfig(
@@ -82,7 +83,7 @@ class VariableHeader extends StatelessWidget {
       case HeaderType.date:
         return _dateHeader(config, context);
       case HeaderType.logo:
-        return _logoHeader();
+        return _logoHeader(config, context);
       case HeaderType.content:
         return _contentHeader(config, context);
       case HeaderType.searchBar:
@@ -102,33 +103,34 @@ class VariableHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            if (config.showSort)
-              IconBtn(
-                  iconKey: "sort",
-                  onTap: onSort,
-                  color: Theme.of(context).colorScheme.onSurface),
-            if (config.showSearch)
-              IconBtn(
-                  iconKey: "search",
-                  onTap: onSearch,
-                  color: Theme.of(context).colorScheme.onSurface),
-            if (config.showMore)
-              IconBtn(
-                  iconKey: "more",
-                  onTap: onMore,
-                  color: Theme.of(context).colorScheme.onSurface),
+            if (config.showSort) IconBtn(iconKey: "sort", onTap: onSort),
+            if (config.showSearch) IconBtn(iconKey: "search", onTap: onSearch),
+            if (config.showMore) IconBtn(iconKey: "more", onTap: onMore),
           ],
         ),
       ],
     );
   }
 
-  Widget _logoHeader() {
-    return const Center(
-      child: Text(
-        "VERY MEMO",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
+  Widget _logoHeader(HeaderConfig config, BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              ImageUtil.showImage(
+                'assets/images/logo.svg',
+                height: 22,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onSurface,
+                  BlendMode.srcIn,
+                ),
+              )
+            ],
+          ),
+        ),
+        if (config.showMore) IconBtn(iconKey: "more", onTap: onMore),
+      ],
     );
   }
 
@@ -149,6 +151,7 @@ class VariableHeader extends StatelessWidget {
             height: 40,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),

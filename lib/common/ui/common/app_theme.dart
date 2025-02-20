@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   static const coral = Color(0xffFF6D75);
-  static const lightcoral = Color(0xffEEC2C4);
+  static const lightcoral = Color(0xffFFF1F1);
   static const purple = Color(0xff7C60FD);
   static const lightPurple = Color(0xff9D87FF);
   static const red = Color(0xfff72349);
-  static const redbrown = Color(0xff994146);
-  static const palepink = Color(0xffFFF1F1);
+  static const redbrown = Color(0xffCC6369);
+  static const palepink = Color(0xffEEC2C4);
   static const palepurple = Color(0xffF3F1FF);
   static const palegrey = Color(0xffF3F6FB);
   static const grey100 = Color(0xff171717);
@@ -24,7 +24,7 @@ class AppColor {
   static const grey0 = Color(0xffFBFBFB);
   static const hover = Color(0xffF7F7F7);
   static const white = Color(0xffffffff);
-  static const modal = Color(0x80000000);
+  static const modal = Color(0x99000000);
 }
 
 ColorScheme lightThemeColors(context) {
@@ -32,7 +32,7 @@ ColorScheme lightThemeColors(context) {
     brightness: Brightness.light,
     primary: AppColor.coral,
     onPrimary: AppColor.white,
-    primaryContainer: AppColor.palepink,
+    primaryContainer: AppColor.lightcoral,
     onPrimaryContainer: AppColor.coral,
     secondary: AppColor.purple,
     onSecondary: AppColor.white,
@@ -43,7 +43,8 @@ ColorScheme lightThemeColors(context) {
     onTertiaryContainer: AppColor.grey30,
     error: AppColor.red,
     onError: AppColor.white,
-    onErrorContainer: AppColor.redbrown,
+    errorContainer: AppColor.redbrown,
+    onErrorContainer: AppColor.palepink,
     surfaceDim: AppColor.hover,
     surface: AppColor.white,
     surfaceBright: AppColor.grey0,

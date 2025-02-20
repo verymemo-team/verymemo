@@ -32,13 +32,16 @@ class MemoList extends StatelessWidget {
               ),
             const SizedBox(height: 4),
             if (memo.memoContent != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: MemoContent(text: memo.memoContent!),
+              GestureDetector(
+                onLongPress: () => viewModel.handleMemoLongPress(context, memo),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: MemoContent(text: memo.memoContent!),
+                ),
               ),
             const SizedBox(height: 4),
             if (memo.imageUrls != null && memo.imageUrls!.isNotEmpty)
-              MemoImages(imageUrls: memo.imageUrls!),
+              MemoImages(memo: memo),
             const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

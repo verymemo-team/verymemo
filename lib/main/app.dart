@@ -24,7 +24,7 @@ class App extends ConsumerWidget {
         colorScheme: darkThemeColors(context),
         useMaterial3: true,
       ),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
     );
   }
 }

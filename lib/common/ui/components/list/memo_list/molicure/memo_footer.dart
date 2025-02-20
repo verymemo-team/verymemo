@@ -19,6 +19,7 @@ class MemoFooter extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onTertiaryContainer,
               ),
         ),
+        
         // 아이콘 추가 필요
       ],
     );

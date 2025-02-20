@@ -1,13 +1,18 @@
+import 'dart:io';
 import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/modal/modal_select.dart';
 
-class MemoListViewModel {
+class MemoListViewModel extends ChangeNotifier {
 // 데이터와 로직 관리
 
   List<MemoListModel> memoList = [
     MemoListModel(
       userName: '하누리',
       description: '우리집 귀요미',
-      memoContent: 'StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다.',
+      memoContent:
+          'StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다.StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다.StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다.StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다. StatefulWidget으로 변경하여 접기/펼치기 상태를 관리합니다.',
       links: [
         LinkData(
           url: 'https://flutter.dev',
@@ -61,7 +66,7 @@ class MemoListViewModel {
 
   List<LinkData> extractLinks() {
     // 이 메모 리스트를 기존에 파일에서
-    //생성한 리스트를 가져오기에 이렇게 파라미터로 받아와서 사용할수 있도록 사용했습니다.
+    //생성한 리스트를 가져오기에 이렇게 파라미터로 받아와서 사용했습니다.
     List<LinkData> allLinks = [];
     for (var memo in memoList) {
       if (memo.links != null) {
@@ -69,5 +74,60 @@ class MemoListViewModel {
       }
     }
     return allLinks;
+  }
+
+  // 이미지 관련 로직 추가
+  bool get isDesktopPlatform =>
+      kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+
+  int getRemainingCount(List<String>? imageUrls) =>
+      (imageUrls?.length ?? 0) > 5 ? (imageUrls?.length ?? 0) - 5 : 0;
+
+  int getDisplayCount(List<String>? imageUrls) =>
+      (imageUrls?.take(5).length ?? 0);
+
+  bool isUseFixedSize(List<String>? imageUrls) =>
+      getDisplayCount(imageUrls) <= 2;
+
+  List<String> getDisplayImages(List<String>? imageUrls) =>
+      imageUrls?.take(5).toList() ?? [];
+
+  bool shouldShowRemainingCount(List<String>? imageUrls, int index) =>
+      index == 4 && getRemainingCount(imageUrls) > 0;
+
+//모달
+  void handleMemoLongPress(BuildContext context, MemoListModel memo) {
+    ModalSelect.show(
+      context: context,
+      options: ['수정', '북마크', '공유', '공개', '삭제'],
+      onSelect: (value) => _handleModalSelection(value, memo),
+      isHighlighted: [false, false, false, true, true],
+    );
+  }
+
+  void _handleModalSelection(String value, MemoListModel memo) {
+    switch (value) {
+      case '수정하기':
+        _editMemo(memo);
+        break;
+      case '삭제하기':
+        _deleteMemo(memo);
+        break;
+      case '공유하기':
+        _shareMemo(memo);
+        break;
+    }
+  }
+
+  void _editMemo(MemoListModel memo) {
+    // 수정 로직 구현
+  }
+
+  void _deleteMemo(MemoListModel memo) {
+    // 삭제 로직 구현
+  }
+
+  void _shareMemo(MemoListModel memo) {
+    // 공유 로직 구현
   }
 }

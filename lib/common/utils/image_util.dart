@@ -9,8 +9,7 @@ class ImageUtil {
 
   static Widget showImage(
     String path, {
-    // double? width,
-    // double? height,
+    double? height,
     Size? size,
     bool onLoading = true,
     Color? color,
@@ -25,8 +24,9 @@ class ImageUtil {
         return SvgPicture.network(
           path,
           fit: fit ?? BoxFit.cover,
-          color: color,
           colorFilter: colorFilter,
+          width: size?.width,
+          height: height ?? size?.height,
         );
       } else if (path.contains('http') || path.contains('https')) {
         return CachedNetworkImage(
@@ -42,8 +42,7 @@ class ImageUtil {
           path,
           fit: fit ?? BoxFit.cover,
           width: size?.width,
-          height: size?.height,
-          color: color,
+          height: height ?? size?.height, //사라 - 너비 기준으로 높이 자동 조절되게 수정
           colorFilter: colorFilter,
         );
       } else if (path.contains('.json')) {
@@ -67,7 +66,6 @@ class ImageUtil {
         fit: fit ?? BoxFit.cover,
         width: size?.width,
         height: size?.height,
-        color: color,
         colorFilter: colorFilter,
       );
     }
@@ -89,6 +87,7 @@ class ImageUtil {
             height: layout.maxHeight > offset
                 ? layout.maxHeight - offset
                 : double.infinity,
+            // ignore: deprecated_member_use
             color: color ?? Colors.black.withOpacity(0.4),
             child: showImage(
               path,

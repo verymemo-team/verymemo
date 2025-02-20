@@ -65,6 +65,9 @@ dependencies:
   crypto: ^3.0.3
   any_link_preview: ^3.0.3
 
+  # 추가
+  provider: ^6.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,16 +3,6 @@ import 'package:verymemo/common/extensions/context_extension.dart';
 import 'package:verymemo/common/ui/common/config/config_box_style.dart';
 import 'package:verymemo/common/ui/components/button/button_state.dart';
 
-/// ✅ 버튼 상태 정의 (Primary, Secondary, Tertiary 등)
-enum RoundBtnState {
-  primary,
-  secondary,
-  tertiary,
-  transparent,
-  black,
-  disabled,
-}
-
 /// ✅ 버튼 스타일 컨피그 (색상, 폰트 스타일 등)
 class RoundBtnConfig {
   /// 📌 버튼 크기별 텍스트 스타일 매핑
@@ -84,6 +74,7 @@ class RoundBtn extends StatelessWidget {
 
     Widget buttonContent = BoxConfig.createContainer(
       size: size,
+      context: context,
       backgroundColor: backgroundColor,
       child: Center(
         child: Text(text ?? "", style: textStyle, textAlign: TextAlign.center),

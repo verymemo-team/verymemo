@@ -23,10 +23,7 @@ class ButtonStateConfig {
       case ButtonState.tertiary:
         return (colorScheme.tertiary, colorScheme.onSurface);
       case ButtonState.disabled:
-        return (
-          colorScheme.onErrorContainer,
-          colorScheme.onSurface.withOpacity(0.5),
-        );
+        return (colorScheme.errorContainer, colorScheme.onErrorContainer);
       case ButtonState.transparent:
         return (Colors.transparent, colorScheme.onSurface);
       case ButtonState.black:
