@@ -10,12 +10,10 @@ enum TitleAlignment { left, center }
 class TitleSubtitleConfig {
   final TitleSize titleSize;
   final TitleAlignment alignment;
-  final bool isExpanded;
 
   const TitleSubtitleConfig({
     this.titleSize = TitleSize.medium,
     this.alignment = TitleAlignment.left,
-    this.isExpanded = false,
   });
 
   /// 📌 타이틀 스타일 반환
@@ -60,26 +58,29 @@ class TitleSubtitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: config.getCrossAxisAlignment(),
-      mainAxisSize: config.isExpanded ? MainAxisSize.max : MainAxisSize.min,
-      children: [
-        Text(
-          title,
-          style: config.getTitleStyle(context),
-          textAlign: textAlign,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        if (subtitle != null) // ✅ 서브타이틀이 있을 경우만 렌더링
+    return SizedBox(
+      width: double.infinity, // 항상 전체 너비 사용
+      child: Column(
+        crossAxisAlignment: config.getCrossAxisAlignment(),
+        mainAxisSize: MainAxisSize.min,
+        children: [
           Text(
-            subtitle!,
-            style: config.getSubtitleStyle(context),
+            title,
+            style: config.getTitleStyle(context),
             textAlign: textAlign,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-      ],
+          if (subtitle != null)
+            Text(
+              subtitle!,
+              style: config.getSubtitleStyle(context),
+              textAlign: textAlign,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+        ],
+      ),
     );
   }
 }
@@ -90,14 +91,12 @@ class TitleSubtitlePresets {
   static const TitleSubtitleConfig modalPopup = TitleSubtitleConfig(
     titleSize: TitleSize.large,
     alignment: TitleAlignment.center,
-    isExpanded: true,
   );
 
   /// 📌 리스트 아이템용
   static const TitleSubtitleConfig listItem = TitleSubtitleConfig(
     titleSize: TitleSize.small,
     alignment: TitleAlignment.left,
-    isExpanded: true,
   );
 }
 
