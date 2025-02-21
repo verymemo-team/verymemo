@@ -1,4 +1,3 @@
-
 class MemoListModel {
   final String? profileImageUrl;
   final String? userName;

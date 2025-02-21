@@ -172,10 +172,10 @@ class HomeBranch extends Branch {
   HomeBranch()
       : super(
           initialLocation: AppRoute.home,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/memo.svg",
-          ),
-          icon: ImageUtil.showImage("assets/icons/memo_unselecetd.svg"),
+          // selectedIcon: ImageUtil.showImage(
+          //   "assets/icons/memo.svg",
+          // ),
+          // icon: ImageUtil.showImage("assets/icons/memo_unselecetd.svg"),
           label: "홈",
         );
 }
@@ -188,14 +188,14 @@ class EditBranch extends Branch {
   EditBranch()
       : super(
           initialLocation: AppRoute.edit,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/edit.svg",
-            color: Colors.white,
-          ),
-          icon: ImageUtil.showImage(
-            "assets/icons/edit_unselected.svg",
-            color: Colors.white,
-          ),
+          // selectedIcon: ImageUtil.showImage(
+          //   "assets/icons/edit.svg",
+          //   color: Colors.white,
+          // ),
+          // icon: ImageUtil.showImage(
+          //   "assets/icons/edit_unselected.svg",
+          //   color: Colors.white,
+          // ),
           label: "수정",
         );
 }
@@ -208,13 +208,13 @@ class DeleteBranch extends Branch {
   DeleteBranch()
       : super(
           initialLocation: AppRoute.delete,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/delete.svg",
-            color: Colors.white,
-          ),
-          icon: ImageUtil.showImage(
-            "assets/icons/delete.svg",
-          ),
+          // selectedIcon: ImageUtil.showImage(
+          //   "assets/icons/delete.svg",
+          //   color: Colors.white,
+          // ),
+          // icon: ImageUtil.showImage(
+          //   "assets/icons/delete.svg",
+          // ),
           label: "삭제",
         );
 }
@@ -227,9 +227,9 @@ class FeedBranch extends Branch {
   FeedBranch()
       : super(
           initialLocation: AppRoute.feed,
-          selectedIcon: ImageUtil.showImage("assets/icons/feed.svg",
-              color: Color(0xffFF6D75)),
-          icon: ImageUtil.showImage("assets/icons/feed.svg"),
+          // selectedIcon: ImageUtil.showImage("assets/icons/feed.svg",
+          //     color: Color(0xffFF6D75)),
+          // icon: ImageUtil.showImage("assets/icons/feed.svg"),
           label: "피드",
         );
 }
@@ -242,13 +242,13 @@ class SearchBranch extends Branch {
   SearchBranch()
       : super(
           initialLocation: AppRoute.search,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/search.svg",
-            color: Colors.white,
-          ),
-          icon: ImageUtil.showImage(
-            "assets/icons/search_unselected.svg",
-          ),
+          // selectedIcon: ImageUtil.showImage(
+          //   "assets/icons/search.svg",
+          //   color: Colors.white,
+          // ),
+          // icon: ImageUtil.showImage(
+          //   "assets/icons/search_unselected.svg",
+          // ),
           label: "검색",
         );
 }
@@ -261,13 +261,13 @@ class SettingsBranch extends Branch {
   SettingsBranch()
       : super(
           initialLocation: AppRoute.settings,
-          selectedIcon: ImageUtil.showImage(
-            "assets/icons/more.svg",
-            color: Colors.white,
-          ),
-          icon: ImageUtil.showImage(
-            "assets/icons/more.svg",
-          ),
+          // selectedIcon: ImageUtil.showImage(
+          //   "assets/icons/more.svg",
+          //   color: Colors.white,
+          // ),
+          // icon: ImageUtil.showImage(
+          //   "assets/icons/more.svg",
+          // ),
           label: "설정",
         );
 }
