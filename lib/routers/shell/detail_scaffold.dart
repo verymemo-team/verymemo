@@ -25,10 +25,11 @@ class _DetailScaffoldState extends State<DetailScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(true),
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56),
+        child: VariableHeader(
+          type: HeaderType.content,
+          onBack: () => context.pop(true),
         ),
       ),
       body: SafeArea(

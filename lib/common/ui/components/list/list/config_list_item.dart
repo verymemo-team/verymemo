@@ -39,7 +39,7 @@ class ListItemConfig {
   const ListItemConfig({
     // 레이아웃 관련
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    this.itemSpacing = 12.0,
+    this.itemSpacing = 4.0,
 
     // leading 관련
     this.leadingType = ListItemType.none,

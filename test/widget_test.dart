@@ -1,28 +1,106 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:verymemo/common/ui/components/button/icon_btn.dart';
+import 'package:verymemo/common/ui/components/list/list/config_list_item.dart';
+import 'package:verymemo/common/ui/components/list/list/list_item.dart';
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    // await tester.pumpWidget(const MyApp());
+class SettingsView extends ConsumerWidget {
+  const SettingsView({super.key});
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('설정'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+              ),
+              title: '동기화',
+              onTap: () => debugPrint("동기화 클릭!"),
+            ),
+            // ListItem(
+            //   config: ListItemConfig(
+            //     leadingType: ListItemType.icon,
+            //     leadingIconKey: 'settings',
+            //     leadingIconSize: IconSize.medium,
+            //     leadingIconColor: Theme.of(context).colorScheme.primary,
+            //   ),
+            //   title: '태그 관리',
+            //   onTap: () => debugPrint("태그 관리 클릭!"),
+            // ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+                trailingType: ListItemType.toggle,
+              ),
+              title: '진입시 키패드',
+              onTap: () => debugPrint("진입시 키패드 클릭!"),
+            ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+                trailingType: ListItemType.toggle,
+              ),
+              title: '키패드 제스쳐',
+              onTap: () => debugPrint("키패드 제스쳐 클릭!"),
+            ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+              ),
+              title: '최근 삭제한 메모',
+              onTap: () => debugPrint("최근 삭제한 메모 클릭!"),
+            ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+              ),
+              title: '앱 리뷰 남기기',
+              onTap: () => debugPrint("앱 리뷰 남기기 클릭!"),
+            ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+              ),
+              title: '오픈 카톡 커뮤니티',
+              onTap: () => debugPrint("오픈 카톡 커뮤니티 클릭!"),
+            ),
+            ListItem(
+              config: ListItemConfig(
+                leadingType: ListItemType.icon,
+                leadingIconKey: 'settings',
+                leadingIconSize: IconSize.medium,
+                leadingIconColor: Theme.of(context).colorScheme.primary,
+              ),
+              title: '버전 정보',
+              onTap: () => debugPrint("버전 정보 클릭!"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

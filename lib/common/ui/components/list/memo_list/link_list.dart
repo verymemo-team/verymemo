@@ -3,7 +3,7 @@ import 'package:verymemo/common/ui/components/list/list/list_item.dart';
 import 'package:verymemo/common/ui/components/list/list/config_list_item.dart';
 import 'package:verymemo/common/ui/common/title_subtitle.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
+import 'package:verymemo/features/memo/presentation/memo_home_viewmodel.dart';
 
 class LinkList extends StatelessWidget {
   // final List<MemoListModel> memos;
@@ -46,6 +46,7 @@ class LinkList extends StatelessWidget {
             trailingIconKey: 'memo',
             trailingIconSize: IconSize.small,
             textConfig: TitleSubtitlePresets.listItem,
+            itemSpacing: 12,
           ),
           onTap: () => onLinkTap?.call(link.url),
         );
