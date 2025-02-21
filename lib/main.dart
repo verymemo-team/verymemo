@@ -47,8 +47,27 @@ class MainPage extends StatelessWidget {
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsView(),
+                PageRouteBuilder(
+                  fullscreenDialog: false,
+                  transitionDuration: const Duration(milliseconds: 250),
+                  reverseTransitionDuration: const Duration(milliseconds: 250),
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const SettingsView(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(1.0, 0.0);
+                    const end = Offset.zero;
+                    final tween = Tween(begin: begin, end: end);
+                    final curvedAnimation = CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.decelerate,
+                    );
+                    final offsetAnimation = curvedAnimation.drive(tween);
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             },
