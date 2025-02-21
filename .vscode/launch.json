@@ -33,6 +33,17 @@
         "--dart-define=SUPABASE_URL=https://oiwxxkyijaawnqrfqbsm.supabase.co",
         "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pd3h4a3lpamFhd25xcmZxYnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2MTg4NTksImV4cCI6MjA1NTE5NDg1OX0.8HoVnVF2Uj9zO9c0NvDBOEKLhi1UYlrxEUkBfogjmBo"
       ]
+    },
+    {
+      "name": "Flutter",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=SUPABASE_URL=your_supabase_url",
+        "--dart-define=SUPABASE_ANON_KEY=your_supabase_anon_key",
+        "--dart-define=GOOGLE_CLIENT_ID=your_google_client_id",
+        "--dart-define=GOOGLE_SERVER_CLIENT_ID=your_google_server_client_id"
+      ]
     }
   ]
 } 

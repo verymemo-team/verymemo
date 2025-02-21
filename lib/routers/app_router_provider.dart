@@ -11,7 +11,7 @@ class AppRouter {
 
   AppRouter(this.interceptor, this.ref);
   late final config = GoRouter(
-    initialLocation: AppRoute.home,
+    initialLocation: AppRoute.login,
     navigatorKey: NavigatorKey.routerKey,
     debugLogDiagnostics: true,
     routes: $appRoutes,
