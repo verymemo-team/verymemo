@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_model.dart';
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
+import 'package:verymemo/features/memo/domain/models/memo_list_model.dart';
+import 'package:verymemo/features/memo/presentation/memo_home_viewmodel.dart';
 
 class MemoImages extends StatelessWidget {
   final MemoListModel memo;

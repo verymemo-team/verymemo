@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final settingsViewModelProvider = StateNotifierProvider<SettingsViewModel, SettingsState>((ref) {
+final settingsViewModelProvider =
+    StateNotifierProvider<SettingsViewModel, SettingsState>((ref) {
   return SettingsViewModel();
 });
 

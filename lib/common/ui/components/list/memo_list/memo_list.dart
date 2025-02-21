@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:verymemo/common/ui/components/list/memo_list/memo_list_view_model.dart';
+import 'package:verymemo/features/memo/presentation/memo_home_viewmodel.dart';
 import 'package:verymemo/common/ui/components/list/pofile_list/profile_list.dart';
 import 'molicure/index_memo_list_component.dart';
 
