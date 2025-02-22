@@ -49,8 +49,8 @@ class _HomeScaffoldState extends State<HomeScaffold> {
                         ? HeaderType.date
                         : HeaderType.logo,
                     onSort: () => debugPrint("정렬 클릭"),
-                    onSearch: () => debugPrint("검색 클릭"),
-                    onMore: () => debugPrint("더보기 클릭"),
+                    onSearch: () => context.go(AppRoute.search),
+                    onMore: () => context.go(AppRoute.settings),
                     onBack: () => debugPrint("뒤로 가기 클릭"),
                   ),
                 ),

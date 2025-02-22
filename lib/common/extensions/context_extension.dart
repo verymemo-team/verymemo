@@ -29,7 +29,7 @@ extension ContextExtension on BuildContext {
     );
   }
 
-  void pop([bool? result]) {
+  void poped([bool? result]) {
     if (GoRouter.of(this).canPop()) {
       GoRouter.of(this).pop(result ?? true);
     }

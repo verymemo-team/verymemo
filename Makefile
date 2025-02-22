@@ -64,9 +64,9 @@ endif
 buildRunner:
 	@echo "Freezed Running build runner..."
 ifeq ($(DETECTED_OS), Windows)
-	@flutter pub run build_runner build --delete-conflicting-outputs
+	@flutter pub run build_runner watch --delete-conflicting-outputs
 else
-	@$(FLUTTER) pub run build_runner build --delete-conflicting-outputs
+	@$(FLUTTER) pub run build_runner watch --delete-conflicting-outputs
 endif
 
 # Define the env target for Unix-like systems
