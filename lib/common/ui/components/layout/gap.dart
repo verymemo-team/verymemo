@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -10,12 +9,11 @@ class Gap extends StatelessWidget {
   /// The [crossAxisExtent] must be either null or positive.
   const Gap(
     this.mainAxisExtent, {
-    Key? key,
+    super.key,
     this.crossAxisExtent,
     this.color,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
-        assert(crossAxisExtent == null || crossAxisExtent >= 0),
-        super(key: key);
+        assert(crossAxisExtent == null || crossAxisExtent >= 0);
 
   /// Creates a widget that takes a fixed [mainAxisExtent] of space in the
   /// direction of its parent and expands in the cross axis direction.
@@ -80,10 +78,10 @@ class MaxGap extends StatelessWidget {
   /// The [crossAxisExtent] must be either null or positive.
   const MaxGap(
     this.mainAxisExtent, {
-    Key? key,
+    super.key,
     this.crossAxisExtent,
     this.color,
-  }) : super(key: key);
+  });
 
   /// Creates a widget that takes, at most, the specified [mainAxisExtent] of
   /// space in a [Row], [Column], or [Flex] widget and expands in the cross axis
@@ -139,13 +137,11 @@ class MaxGap extends StatelessWidget {
 class _RawGap extends LeafRenderObjectWidget {
   const _RawGap(
     this.mainAxisExtent, {
-    Key? key,
     this.crossAxisExtent,
     this.color,
     this.fallbackDirection,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
-        assert(crossAxisExtent == null || crossAxisExtent >= 0),
-        super(key: key);
+        assert(crossAxisExtent == null || crossAxisExtent >= 0);
 
   final double mainAxisExtent;
 
