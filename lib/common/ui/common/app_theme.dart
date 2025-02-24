@@ -178,3 +178,34 @@ TextTheme textTheme(context) => const TextTheme(
           letterSpacing: -0.5,
           height: 1.5),
     );
+
+InputDecorationTheme inputDecorationTheme(context) => InputDecorationTheme(
+      fillColor: Theme.of(context).colorScheme.tertiary,
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.transparent, width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      contentPadding:
+          EdgeInsets.symmetric(horizontal: 16, vertical: 12), // 내부 여백
+
+      // ✅ 에러 상태 (입력값이 잘못되었을 때)
+      errorBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(color: Theme.of(context).colorScheme.error, width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+
+      // ✅ 힌트 텍스트 스타일 (Placeholder)
+      hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: Theme.of(context).colorScheme.onTertiaryContainer,
+          ),
+      // ✅ 레이블 텍스트 스타일 (labelText)
+      labelStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+
+      // ✅ 에러 텍스트 스타일
+      errorStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: Theme.of(context).colorScheme.error,
+          ),
+    );
