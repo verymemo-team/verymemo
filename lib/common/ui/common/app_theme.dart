@@ -179,33 +179,49 @@ TextTheme textTheme(context) => const TextTheme(
           height: 1.5),
     );
 
-InputDecorationTheme inputDecorationTheme(context) => InputDecorationTheme(
-      fillColor: Theme.of(context).colorScheme.tertiary,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.transparent, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      contentPadding:
-          EdgeInsets.symmetric(horizontal: 16, vertical: 12), // 내부 여백
+InputDecorationTheme inputDecorationTheme(context) {
+  final colorScheme = lightThemeColors(context);
+  final defaultBorder = OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.transparent),
+    borderRadius: BorderRadius.circular(8),
+  );
 
-      // ✅ 에러 상태 (입력값이 잘못되었을 때)
-      errorBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(color: Theme.of(context).colorScheme.error, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
+  return InputDecorationTheme(
+    filled: true,
+    fillColor: colorScheme.tertiary,
+    border: defaultBorder,
+    enabledBorder: defaultBorder,
+    focusedBorder: defaultBorder,
+    errorBorder: defaultBorder.copyWith(
+      borderSide: BorderSide(color: colorScheme.error, width: 2),
+    ),
+    focusedErrorBorder: defaultBorder.copyWith(
+      borderSide: BorderSide(color: colorScheme.error, width: 2),
+    ),
+    disabledBorder: defaultBorder,
+    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12), // 내부 여백
 
-      // ✅ 힌트 텍스트 스타일 (Placeholder)
-      hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onTertiaryContainer,
-          ),
-      // ✅ 레이블 텍스트 스타일 (labelText)
-      labelStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+    // ✅ 힌트 텍스트 스타일 (Placeholder)
+    hintStyle: textTheme(context).labelLarge?.copyWith(
+          color: colorScheme.onTertiaryContainer,
+        ),
+    // ✅ 레이블 텍스트 스타일 (labelText)
+    labelStyle: textTheme(context).labelSmall?.copyWith(
+          color: colorScheme.onSurface,
+        ),
 
-      // ✅ 에러 텍스트 스타일
-      errorStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: Theme.of(context).colorScheme.error,
-          ),
-    );
+    // ✅ 에러 텍스트 스타일
+    errorStyle: textTheme(context).labelLarge?.copyWith(
+          color: colorScheme.error,
+        ),
+  );
+}
+
+ThemeData lightTheme(BuildContext context) {
+  return ThemeData(
+    colorScheme: lightThemeColors(context),
+    textTheme: textTheme(context),
+    inputDecorationTheme: inputDecorationTheme(context),
+    useMaterial3: true,
+  );
+}

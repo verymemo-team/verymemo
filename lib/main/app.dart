@@ -16,11 +16,13 @@ class App extends ConsumerWidget {
       routerConfig: router.config,
       theme: ThemeData(
         textTheme: textTheme(context),
+        inputDecorationTheme: inputDecorationTheme(context),
         colorScheme: lightThemeColors(context),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         textTheme: textTheme(context),
+        inputDecorationTheme: inputDecorationTheme(context),
         colorScheme: darkThemeColors(context),
         useMaterial3: true,
       ),

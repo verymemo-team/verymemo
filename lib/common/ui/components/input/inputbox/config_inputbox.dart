@@ -1,167 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:verymemo/common/ui/components/button/icon_btn.dart';
 
 /// ✅ 인풋 박스 타입 정의
-enum InputBoxType { normal, validation, search }
+enum InputBoxType { singleline, multiline }
 
 /// ✅ 인풋 박스 상태 정의
-enum InputBoxState { defaultState, success, error, disabled }
+enum InputBoxState { defaultState, success, error, done, disabled }
 
 /// ✅ 인풋 박스 사이즈 정의
-enum InputBoxSize { medium, large }
+enum InputBoxSize { small, large }
 
 class InputBoxConfig {
-  /// 📌 인풋 박스 테두리 스타일
-  static OutlineInputBorder borderStyle(
-    BuildContext context,
-    InputBoxState state,
-  ) {
-    // 기본 테두리 스타일
-    final defaultBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Colors.transparent),
-    );
+  /// 📌 인풋 박스 높이 반환 (small: 48, large: 56)
+  static double getHeight(InputBoxSize size) {
+    return size == InputBoxSize.large ? 56.0 : 48.0;
+  }
 
-    // 상태에 따른 테두리 스타일 오버라이드
-    switch (state) {
-      case InputBoxState.error:
-        return defaultBorder.copyWith(
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-            width: 2,
-          ),
-        );
-      default:
-        return defaultBorder;
-    }
+  /// 📌 인풋 박스 테두리 스타일 (`inputDecorationTheme` 활용)
+  static OutlineInputBorder borderStyle(
+      BuildContext context, InputBoxState state) {
+    final theme = Theme.of(context).inputDecorationTheme;
+    return state == InputBoxState.error
+        ? theme.errorBorder as OutlineInputBorder // ✅ 전역 설정 재사용
+        : theme.enabledBorder as OutlineInputBorder;
   }
 
   /// 📌 텍스트 스타일 설정
-  static TextStyle getTextStyle(
-    BuildContext context,
-    InputBoxState state,
-  ) {
-    // 기본 텍스트 스타일
-    final defaultStyle = Theme.of(context).textTheme.labelMedium!;
-
-    // 상태에 따른 텍스트 스타일 오버라이드
-    switch (state) {
-      case InputBoxState.disabled:
-        return defaultStyle.copyWith(
-          color: Theme.of(context).colorScheme.onTertiaryContainer,
-        );
-      default:
-        return defaultStyle;
-    }
+  static TextStyle getTextStyle(BuildContext context, InputBoxState state) {
+    return Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: state == InputBoxState.disabled
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.onSurface,
+            ) ??
+        const TextStyle(); // null일 경우 기본 스타일 제공
   }
 
-  /// 📌 인풋 박스 테두리 스타일
-  static InputDecoration getDecoration({
-    required BuildContext context,
-    required InputBoxState state,
-    required InputBoxType type,
-    String? hintText,
-    required InputBoxSize size,
-    VoidCallback? onClear,
-  }) {
+  /// 📌 테마 기반으로 `InputDecoration` 설정
+  static InputDecoration getInputDecoration(
+      BuildContext context, InputBoxState state) {
+    final theme = Theme.of(context).inputDecorationTheme;
     return InputDecoration(
-      hintText: hintText,
-      filled: true,
-      // disabled 상태일 때 배경색 처리
+      // theme의 속성들을 복사
       fillColor: state == InputBoxState.disabled
           ? Theme.of(context).disabledColor.withOpacity(0.1)
-          : Theme.of(context).colorScheme.tertiary,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-      // 테두리 스타일 직접 정의
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: state == InputBoxState.error
-              ? Theme.of(context).colorScheme.error
-              : Colors.transparent,
-          width: state == InputBoxState.error ? 2 : 1,
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: state == InputBoxState.error
-              ? Theme.of(context).colorScheme.error
-              : Colors.transparent,
-          width: state == InputBoxState.error ? 2 : 1,
-        ),
-      ),
-      suffixIcon: _buildSuffixIcon(state, type, onClear),
-      // 힌트 텍스트 스타일
-      hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: state == InputBoxState.disabled
-                ? Theme.of(context).disabledColor
-                : Theme.of(context).hintColor,
-          ),
+          : theme.fillColor,
+      border: theme.border,
+      enabledBorder: theme.enabledBorder,
+      errorBorder: theme.errorBorder,
+      hintStyle: theme.hintStyle,
+      contentPadding: theme.contentPadding,
     );
   }
 
-  /// 📌 인풋 박스 오른쪽 아이콘 (검색 / 유효성 체크)
-  static Widget? _buildSuffixIcon(
-      InputBoxState state, InputBoxType type, VoidCallback? onClear) {
-    if (state == InputBoxState.error) {
-      return const Icon(Icons.close, color: Colors.red);
-    } else if (state == InputBoxState.success) {
-      return const Icon(Icons.check, color: Colors.red);
-    } else if (type == InputBoxType.search) {
-      return const Icon(Icons.search, color: Colors.black);
-    }
-    return onClear != null
-        ? GestureDetector(
-            onTap: onClear,
-            child: const Icon(Icons.clear, color: Colors.grey),
-          )
-        : null;
-  }
-
-  /// 📌 사이즈별 높이 값 반환
-  static double getHeight(InputBoxSize size) {
-    switch (size) {
-      case InputBoxSize.medium:
-        return 48.0;
-      case InputBoxSize.large:
-        return 56.0;
+  /// 📌 오른쪽 아이콘 설정
+  static Widget? buildSuffixIcon(
+      BuildContext context, InputBoxState state, InputBoxType type,
+      {VoidCallback? onClear}) {
+    final theme = Theme.of(context);
+    switch (state) {
+      case InputBoxState.error:
+        return IconBtn(iconKey: "close", color: theme.colorScheme.error);
+      case InputBoxState.success:
+        return IconBtn(iconKey: "check", color: theme.colorScheme.primary);
+      default:
+        return type == InputBoxType.singleline
+            ? IconBtn(iconKey: "search", color: theme.colorScheme.onSurface)
+            : onClear != null
+                ? IconBtn(
+                    iconKey: "close",
+                    color: theme.colorScheme.onSurface,
+                    onTap: onClear,
+                  )
+                : null;
     }
   }
 
-  /// 📌 텍스트필드 설정
+  /// 📌 `TextField` 기본 설정
   static Map<String, dynamic> getTextFieldConfig({
     required InputBoxState state,
     required InputBoxType type,
   }) {
     return {
-      'maxLines': type == InputBoxType.normal ? null : 1,
-      'keyboardType': _getKeyboardType(type),
-      'textInputAction': _getTextInputAction(type),
+      'maxLines': type == InputBoxType.singleline ? 2 : null,
+      'keyboardType': type == InputBoxType.singleline
+          ? TextInputType.text
+          : TextInputType.multiline,
+      'textInputAction': type == InputBoxType.singleline
+          ? TextInputAction.search
+          : TextInputAction.newline,
       'enabled': state != InputBoxState.disabled,
     };
-  }
-
-  /// 📌 키보드 타입 설정
-  static TextInputType _getKeyboardType(InputBoxType type) {
-    switch (type) {
-      case InputBoxType.search:
-        return TextInputType.text;
-      case InputBoxType.normal:
-        return TextInputType.multiline;
-      default:
-        return TextInputType.text;
-    }
-  }
-
-  /// 📌 텍스트 입력 액션 설정
-  static TextInputAction _getTextInputAction(InputBoxType type) {
-    switch (type) {
-      case InputBoxType.search:
-        return TextInputAction.search;
-      case InputBoxType.normal:
-        return TextInputAction.newline;
-      default:
-        return TextInputAction.done;
-    }
   }
 }
