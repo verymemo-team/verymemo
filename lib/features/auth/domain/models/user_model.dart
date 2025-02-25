@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:verymemo/common/types/typedef.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as fb;
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
@@ -41,6 +41,31 @@ sealed class UserModel with _$UserModel {
       createdAt: DateTime.parse(user.createdAt),
       lastSignInAt:
           user.lastSignInAt != null ? DateTime.parse(user.lastSignInAt!) : null,
+    );
+  }
+
+  factory UserModel.fromFBUser(fb.User user) {
+    AuthProvider provider = AuthProvider.unknown;
+    if (user.providerData.isNotEmpty) {
+      switch (user.providerData[0].providerId) {
+        case 'google.com':
+          provider = AuthProvider.google;
+          break;
+        case 'apple.com':
+          provider = AuthProvider.apple;
+          break;
+        default:
+          provider = AuthProvider.unknown;
+      }
+    }
+    return UserModel(
+      id: user.uid,
+      email: user.email ?? "",
+      displayName: user.displayName,
+      photoUrl: user.photoURL,
+      provider: provider,
+      createdAt: user.metadata.creationTime ?? DateTime.now(),
+      lastSignInAt: user.metadata.lastSignInTime,
     );
   }
 }

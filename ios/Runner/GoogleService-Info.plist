@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>634454835385-bduobhit7vs66bdkqjca557fviul5v9q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.634454835385-bduobhit7vs66bdkqjca557fviul5v9q</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>634454835385-4qtnscbsm38bda7kgv611nvo6j91j9ph.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyACeAEzfW0FfljtYYc_C_I6sQM5OrxZixo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>634454835385</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.very.verymemo</string>
+	<key>PROJECT_ID</key>
+	<string>very-memo</string>
+	<key>STORAGE_BUCKET</key>
+	<string>very-memo.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:634454835385:ios:b44169da394eee5c619b68</string>
+</dict>
+</plist>

@@ -12,7 +12,7 @@ class SignInUsecase {
   final AuthRepository _authRepository;
   SignInUsecase(this._authRepository);
 
-  Future<UserModel> signInWithGoogle() async {
+  Future<UserModel?> signInWithGoogle() async {
     try {
       return await _authRepository.signInWithGoogle();
     } catch (e) {
@@ -20,7 +20,7 @@ class SignInUsecase {
     }
   }
 
-  Future<UserModel> signInWithApple() async {
+  Future<UserModel?> signInWithApple() async {
     try {
       return await _authRepository.signInWithApple();
     } catch (e) {
