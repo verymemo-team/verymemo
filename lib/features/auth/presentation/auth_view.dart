@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,8 @@ import 'package:verymemo/common/types/login_channel.dart';
 import 'package:verymemo/common/ui/components/layout/gap.dart';
 import 'package:verymemo/common/utils/image_util.dart';
 import 'package:verymemo/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:verymemo/features/auth/presentation/providers/auth_provider.dart';
+import 'package:verymemo/features/auth/presentation/providers/state/auth_state.dart';
 import 'package:verymemo/routers/router.dart';
 
 class AuthView extends ConsumerWidget {
@@ -14,6 +18,16 @@ class AuthView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AuthState>(authStateNotifierProvider, (previous, current) {
+      current.whenOrNull(
+        error: (message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+          log(message);
+        },
+      );
+    });
     return Stack(
       children: [
         Positioned.fill(
@@ -69,14 +83,20 @@ class _CircleButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final signInUseCase = ref.watch(signInUseCaseProvider);
+    // final signInUseCase = ref.watch(signInUseCaseProvider);
     return GestureDetector(
       onTap: channel.isUser
           ? () {
               if (channel.title == "Google") {
-                signInUseCase.signInWithGoogle();
+                // signInUseCase.signInWithGoogle();
+                ref
+                    .read(authStateNotifierProvider.notifier)
+                    .signIn(AuthProvider.google);
               } else {
-                signInUseCase.signInWithApple();
+                // signInUseCase.signInWithApple();
+                ref
+                    .read(authStateNotifierProvider.notifier)
+                    .signIn(AuthProvider.apple);
               }
             }
           : () => context.go(AppRoute.home),

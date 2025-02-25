@@ -2,8 +2,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:verymemo/features/auth/domain/models/user_model.dart';
 
 abstract class AuthRepository {
-  Future<UserModel> signInWithGoogle();
-  Future<UserModel> signInWithApple();
+  Future<UserModel?> signInWithGoogle();
+  Future<UserModel?> signInWithApple();
   Future<void> signOut();
   Stream<UserModel?> authStateChanges();
   UserModel? getCurrentUser();

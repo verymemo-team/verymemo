@@ -1,33 +1,82 @@
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:verymemo/common/configs/storage_key.dart';
 // import 'package:supabase_flutter/supabase_flutter.dart';
-// import 'package:verymemo/features/auth/data/repositories/auth_repository_impl.dart';
-// import 'package:verymemo/features/auth/data/datasources/supabase/supabase_service.dart';
-// import 'package:verymemo/features/auth/domain/auth_repository.dart';
+import 'package:verymemo/externals/storage/storage_service.dart';
+import 'package:verymemo/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:verymemo/features/auth/domain/models/user_model.dart';
+import 'package:verymemo/features/auth/domain/repositories/auth_repository.dart';
+import 'package:verymemo/features/auth/presentation/providers/state/auth_state.dart';
+import 'package:verymemo/routers/navigation_service.dart';
+import 'package:verymemo/routers/router.dart';
 
-// // Supabase 클라이언트 Provider
-// final supabaseClientProvider = Provider<SupabaseClient>((ref) {
-//   return Supabase.instance.client;
-// });
+final authStateNotifierProvider =
+    StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  final storageService = ref.watch(storageProvider);
+  final navigationService = ref.watch(navigationServiceProvider);
+  return AuthStateNotifier(authRepository, storageService, navigationService);
+});
 
-// // Supabase 서비스 Provider
-// final supabaseServiceProvider = Provider<SupabaseService>((ref) {
-//   final client = ref.watch(supabaseClientProvider);
-//   return SupabaseService(client);
-// });
+enum AuthProvider {
+  google,
+  apple;
 
-// // Auth Repository Provider
-// final authRepositoryProvider = Provider<AuthRepository>((ref) {
-//   final supabaseService = ref.watch(supabaseServiceProvider);
-//   return AuthRepositoryImpl(supabaseService);
-// });
+  String get name => toString().split('.').last;
+}
 
-// // 현재 인증 상태를 관리하는 Provider
-// final authStateProvider = StreamProvider<User?>((ref) {
-//   final repository = ref.watch(authRepositoryProvider);
-//   return repository.authStateChanges();
-// });
+class AuthStateNotifier extends StateNotifier<AuthState> {
+  final AuthRepository _authRepository;
+  final StorageService _storageService;
+  final NavigationService _navigationService;
 
-// // 현재 사용자 Provider
-// final currentUserProvider = Provider<User?>((ref) {
-//   return ref.watch(authStateProvider).value;
-// });
+  AuthStateNotifier(
+      this._authRepository, this._storageService, this._navigationService)
+      : super(
+          const AuthState.initial(),
+        );
+
+  Future<void> signIn(AuthProvider provider) async {
+    try {
+      state = const AuthState.loading();
+      UserModel? user;
+
+      switch (provider) {
+        case AuthProvider.google:
+          user = await _authRepository.signInWithGoogle();
+        case AuthProvider.apple:
+          user = await _authRepository.signInWithApple();
+      }
+
+      if (user != null) {
+        state = AuthState.authenticated(user);
+        await _storageService.set(
+          key: isUserKey,
+          data: 1,
+        );
+        _navigationService.go(AppRoute.home);
+      } else {
+        state = const AuthState.unauthenticated();
+      }
+      // final user = await _authRepository.sign
+    } catch (e) {
+      state = AuthState.error(e.toString());
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      state = const AuthState.loading();
+    } catch (e) {
+      state = AuthState.error(e.toString());
+    }
+  }
+
+  // 현재 인증 상태 체크
+  Future<void> checkAuthState() async {
+    try {
+      state = const AuthState.loading();
+    } catch (e) {
+      state = AuthState.error(e.toString());
+    }
+  }
+}
