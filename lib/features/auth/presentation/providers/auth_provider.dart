@@ -6,12 +6,15 @@ import 'package:verymemo/features/auth/data/repositories/auth_repository_impl.da
 import 'package:verymemo/features/auth/domain/models/user_model.dart';
 import 'package:verymemo/features/auth/domain/repositories/auth_repository.dart';
 import 'package:verymemo/features/auth/presentation/providers/state/auth_state.dart';
+import 'package:verymemo/routers/navigation_service.dart';
+import 'package:verymemo/routers/router.dart';
 
 final authStateNotifierProvider =
     StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   final storageService = ref.watch(storageProvider);
-  return AuthStateNotifier(authRepository, storageService);
+  final navigationService = ref.watch(navigationServiceProvider);
+  return AuthStateNotifier(authRepository, storageService, navigationService);
 });
 
 enum AuthProvider {
@@ -24,8 +27,10 @@ enum AuthProvider {
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final AuthRepository _authRepository;
   final StorageService _storageService;
+  final NavigationService _navigationService;
 
-  AuthStateNotifier(this._authRepository, this._storageService)
+  AuthStateNotifier(
+      this._authRepository, this._storageService, this._navigationService)
       : super(
           const AuthState.initial(),
         );
@@ -48,6 +53,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           key: isUserKey,
           data: 1,
         );
+        _navigationService.go(AppRoute.home);
       } else {
         state = const AuthState.unauthenticated();
       }
