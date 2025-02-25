@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:verymemo/common/ui/components/button/icon_btn.dart';
 import 'package:verymemo/common/utils/image_util.dart';
+import 'package:verymemo/common/ui/components/input/inputbox/inputbox.dart';
+import 'package:verymemo/common/ui/components/input/inputbox/config_inputbox.dart';
 
 enum HeaderType { date, logo, content, searchBar, imageviewer }
 
@@ -73,6 +75,7 @@ class VariableHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 56,
         color: backgroundColor,
+        alignment: Alignment.center,
         child: _buildHeaderContent(config, context),
       ),
     );
@@ -145,29 +148,23 @@ class VariableHeader extends StatelessWidget {
   Widget _searchBarHeader(HeaderConfig config, BuildContext context) {
     return Row(
       children: [
-        if (config.showBackArrow) IconBtn(iconKey: "back", onTap: onBack),
+        if (config.showBackArrow)
+          SizedBox(
+            width: 48, // 아이콘 버튼의 고정 너비
+            child: IconBtn(iconKey: "back", onTap: onBack),
+          ),
         Expanded(
-          child: Container(
-            height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              // ignore: deprecated_member_use
-              color: Colors.grey.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "검색",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                IconBtn(iconKey: "search", onTap: onSearch),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: InputBox(
+              expanded: true,
+              hintText: "검색어를 입력하세요",
+              type: InputBoxType.singleline,
+              size: InputBoxSize.small,
+              onChanged: (value) => debugPrint('Search: $value'),
+              onSubmitted: () => debugPrint('Search submitted'),
+              onClear: () => debugPrint('Search cleared'),
+              onSearchTap: () => debugPrint('Search icon tapped'),
             ),
           ),
         ),
