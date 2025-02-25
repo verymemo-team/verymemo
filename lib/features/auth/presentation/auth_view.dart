@@ -8,7 +8,6 @@ import 'package:verymemo/common/extensions/widget_extension.dart';
 import 'package:verymemo/common/types/login_channel.dart';
 import 'package:verymemo/common/ui/components/layout/gap.dart';
 import 'package:verymemo/common/utils/image_util.dart';
-import 'package:verymemo/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:verymemo/features/auth/presentation/providers/auth_provider.dart';
 import 'package:verymemo/features/auth/presentation/providers/state/auth_state.dart';
 import 'package:verymemo/routers/router.dart';

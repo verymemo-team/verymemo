@@ -55,8 +55,19 @@ class IconConfig {
   }
 
   /// 📌 아이콘 경로 가져오기 (기본 아이콘 설정)
-  static String getIconPath(String iconKey) {
-    return icons[iconKey] ?? "assets/icons/memo.svg";
+  static String getIconPath(dynamic icon) {
+    if (icon is String) {
+      if (icon.contains('/')) {
+        // 직접 경로가 주어진 경우
+        return icon;
+      }
+      // 미리 정의된 아이콘 키를 사용하는 경우
+      return icons[icon] ?? "assets/icons/memo.svg";
+    } else if (icon is IconData) {
+      // Material 아이콘인 경우 PNG 경로로 변환
+      return "assets/icons/${icon.codePoint}.png";
+    }
+    return "assets/icons/memo.svg";
   }
 
   /// 📌 원형 버튼 크기 정의
@@ -74,7 +85,7 @@ class IconConfig {
 
 /// ✅ 아이콘 버튼 위젯
 class IconBtn extends StatelessWidget {
-  final String? iconKey;
+  final dynamic iconKey; // String 또는 IconData를 받을 수 있도록 변경
   final VoidCallback? onTap;
   final IconSize size;
   final Color? color;
@@ -105,7 +116,7 @@ class IconBtn extends StatelessWidget {
     );
 
     final double iconSize = IconConfig.getIconSize(size);
-    final String assetPath = IconConfig.getIconPath(iconKey ?? '');
+    final String assetPath = IconConfig.getIconPath(iconKey);
 
     return InkWell(
       onTap: effectiveState == ButtonState.disabled ? null : onTap,
