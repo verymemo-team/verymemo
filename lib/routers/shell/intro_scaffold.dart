@@ -14,7 +14,7 @@ class IntroScaffold extends StatefulWidget {
 }
 
 class _IntroScaffoldState extends State<IntroScaffold> {
-  void _goBranch(int index) {
+  void goBranch(int index) {
     widget.navigationShell.goBranch(
       index,
       initialLocation: index == widget.navigationShell.currentIndex,
